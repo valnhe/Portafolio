@@ -1,0 +1,82 @@
+---
+import Layout from '../layouts/Layout.astro';
+import AboutMe from '../components/AboutMe.astro';
+---
+
+<Layout title="valnhe">
+	<div id="app">
+		<section class="[grid-area:about] bg-purple-200">
+			<AboutMe>	
+		</section>
+		<section class="picture">
+			foto
+		</section>
+		<section class="[grid-area:tecno] bg-pink-200">
+			tecnologias
+		</section>
+		<section class="[grid-area:cv] bg-pink-300">
+			cv
+		</section>
+		<section class="[grid-area:theme] bg-pink-400">
+			pa cambiar color
+		</section>
+		<a href="/projects" class="[grid-area:project] bg-pink-600">
+			projectos
+		</a>
+		<section class="[grid-area:hour] bg-pink-800">
+			la hora pq si lol
+		</section>
+		<section class="[grid-area:spotify] bg-pink-700">
+			spotify pq si lol
+		</section>
+		<section class="[grid-area:discord] bg-pink-950">
+			discord here
+		</section>
+		<footer class="[grid-area:email] bg-pink-900">
+			email aca
+		</footer>
+	</div>
+</Layout>
+
+<style>
+
+	#app {
+		display: grid;
+		grid-template-areas: 
+			"about about about"
+			"cv cv theme"
+			"tecno tecno tecno"
+			"project project project"
+			"hour spotify discord"
+			"email email email"
+			;
+
+		grid-template-columns: repeat(3, 1fr);
+		grid-template-rows: minmax(200px, 1fr);
+		gap: 5px;
+	}
+
+	.picture {
+		display: none;
+	}
+
+	@media (min-width: 769px) {
+		#app {
+			grid-template-areas: 
+				"about about picture"
+				"cv tecno tecno"
+				"theme tecno tecno"
+				"project project project"
+				"hour spotify discord"
+				"email email email"
+			;
+		}
+
+		.picture {
+			grid-area: picture;
+			background-color: blueviolet;
+			display: block;
+		}
+	}
+
+</style>

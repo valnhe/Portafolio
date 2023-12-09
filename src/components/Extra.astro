@@ -1,0 +1,15 @@
+---
+import staticDiscord from "../images/staticdiscordspinner.png"
+import gifDiscord from "../images/discordspinner.gif"
+---
+
+<section class="[grid-area:hour] shadow-lg bg-hourcolor rounded-3xl p-8">
+    la hora pq si lol
+</section>
+<section class="[grid-area:discord] shadow-lg bg-discordcolor xl:aspect-square rounded-3xl relative overflow-hidden group">
+    
+    <img src={staticDiscord.src} alt="Static Discord" class="object-contain object-center h-full w-full z-0 absolute opacity-100 group-hover:hidden">
+    <img src={gifDiscord.src} alt="Static Discord" class="object-contain object-center h-full w-full z-0 absolute opacity-0 group-hover:opacity-100">
+    
+    <p class="text-white absolute bottom-10 left-1/2 transform -translate-x-1/2">@valnhe</p>
+</section>

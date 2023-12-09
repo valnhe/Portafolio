@@ -5,10 +5,14 @@ export default {
 		extend: {
 			colors: {
 				bkg: 'rgb(var(--color-bkg) / <alpha-value>)',
-				primary: 'rgb(var(--color-primary) / <alpha-value>)',
-				secundary: 'rgb(var(--color-secundary) / <alpha-value>)',
-				tertiary: 'rgb(var(--color-tertiary) / <alpha-value>)',
-				quaternary: 'rgb(var(--color-quaternary) / <alpha-value>)',
+				aboutmecolor: 'rgb(var(--color-aboutmecolor) / <alpha-value>)',
+				curriculumcolor: 'rgb(var(--color-curriculumcolor) / <alpha-value>)',
+				discordcolor: 'rgb(var(--color-discordcolor) / <alpha-value>)',
+				tecnocolor: 'rgb(var(--color-tecnocolor) / <alpha-value>)',
+				changecolor: 'rgb(var(--color-changecolor) / <alpha-value>)',
+				hourcolor: 'rgb(var(--color-hourcolor) / <alpha-value>)',
+				contact: 'rgb(var(--color-contact) / <alpha-value>)',
+
 			}
 		},
 	},

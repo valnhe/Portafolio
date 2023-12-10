@@ -12,6 +12,7 @@ export default {
 				changecolor: 'rgb(var(--color-changecolor) / <alpha-value>)',
 				hourcolor: 'rgb(var(--color-hourcolor) / <alpha-value>)',
 				contact: 'rgb(var(--color-contact) / <alpha-value>)',
+				buttoncontact:'rgb(var(--color-buttoncontact) / <alpha-value>)',
 
 			}
 		},

@@ -6,18 +6,41 @@ import Curriculum from '../components/Curriculum.astro';
 import Extra from '../components/Extra.astro';
 import Projects from '../components/Projects.astro';
 import Email from '../components/Email.astro';
-import ChangeColor from '../components/ChangeColor.astro';
+
+import pdf from "../documents/ValentinaCastillo.pdf"
+import Buttom from '../components/Button.astro'
+import gifComputer from "../images/computer1.gif";
 
 ---
 
 <Layout title="valnhe">
-	<div id="app">
+	<main id="app">
 		<AboutMe/>
 		<Tecno/>
-		<Curriculum/>
-		<ChangeColor/>
-		<Projects/>
+		<a href={pdf} download="ValentinaCastillo.pdf" class="[grid-area:cv] bg-curriculumcolor rounded-3xl p-8 shadow-lg flex flex-wrap justify-center content-center cursor-pointer transition-transform ease-in-out delay-100 hover:scale-95 duration-500">
+			<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-download inline stroke-bkg" width="25" height="25" viewBox="0 0 24 24" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+				<path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+				<path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-2" />
+				<path d="M7 11l5 5l5 -5" />
+				<path d="M12 4l0 12" />
+			  </svg>
+			  <span class="text-bkg ml-2">Mi currículum </span>
+		</a>
+
+		<section class="[grid-area:theme] bg-changecolor rounded-3xl shadow-lg grid place-items-center relative">
+			<Buttom/>
+		</section>
+
+		<a href="/projects" class="[grid-area:project]  rounded-3xl aspect-2/1 shadow-lg relative overflow-hidden transition-all ease-in-out delay-100 hover:scale-95 duration-500">
+			<img src={gifComputer.src} alt="Computer Gif" class="object-cover object-center h-full w-full blur-[1px] z-0 absolute">
+			<div class="z-10 relative p-4 text-white">
+				<svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" class="text-xl opacity-90 transition duration-500 group-hover:opacity-100 absolute bottom-4 right-4" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+				<h3 class="mt-[153px] text-xl font-semibold">Proyectos</h3>
+				<p>Ve los proyectos que he realizado 🩷 </p>
+			</div>
+		</a>
 		<Extra/>
 		<Email/>
-	</div>
+	</main>
 </Layout>
+

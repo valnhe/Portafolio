@@ -3,27 +3,25 @@
     <span class="slider"></span>
 </label>
 
-<script>
-    document.addEventListener('DOMContentLoaded', () => {
-        const mainSection = document.getElementById("main-app");
-        const themeSelector = document.getElementById("theme-selector");
+<script is:inline>
+    const mainSection = document.getElementById("main-app");
+    const themeSelector = document.getElementById("theme-selector");
 
         // Verificar el estado almacenado en localStorage al cargar la página
-        const savedTheme = localStorage.getItem('theme');
-        if (savedTheme === 'dark') {
-            themeSelector.checked = true;
-            mainSection.dataset.theme = 'dark';
-            document.documentElement.classList.toggle('dark');
-        }
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark') {
+        themeSelector.checked = true;
+        mainSection.dataset.theme = 'dark';
+        document.documentElement.classList.toggle('dark');
+    }
 
-        themeSelector.addEventListener('change', (e) => {
-            const theme = themeSelector.checked ? "dark" : "light";
-            mainSection.dataset.theme = theme;
-            document.documentElement.classList.toggle('dark');
+    themeSelector.addEventListener('change', (e) => {
+        const theme = themeSelector.checked ? "dark" : "light";
+        mainSection.dataset.theme = theme;
+        document.documentElement.classList.toggle('dark');
 
-            // Guardar el estado en localStorage
-            localStorage.setItem('theme', theme);
-        });
+         // Guardar el estado en localStorage
+        localStorage.setItem('theme', theme);
     });
 </script>
 

@@ -102,10 +102,10 @@ const { title } = Astro.props;
 	#project {
 			display: grid;
 			grid-template-columns: repeat(4, 1fr);
-			grid-template-rows: 86px auto 1fr;
+			grid-template-rows: auto 86px 1fr;
 			grid-template-areas: 
-				"about about about theme"
-				"about about about link"
+				"about about about about"
+				"theme theme link link"
 				"projects projects projects projects"
 			;
 
@@ -123,6 +123,18 @@ const { title } = Astro.props;
 				"project project discord hour"
 				"email email email email"
 			;
+		}
+
+		#project {
+			grid-template-columns: repeat(4, 1fr);
+			grid-template-rows: 86px auto 1fr;
+			grid-template-areas: 
+				"about about about theme"
+				"about about about link"
+				"projects projects projects projects"
+			;
+
+			gap: 17px;
 		}
 	}
 	

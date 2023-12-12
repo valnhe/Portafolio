@@ -15,7 +15,14 @@ export default {
 				contact: 'rgb(var(--color-contact) / <alpha-value>)',
 				buttoncontact:'rgb(var(--color-buttoncontact) / <alpha-value>)',
 
-			}
+			},
+			gridTemplateColumns: {
+					'projectos': 'repeat(auto-fit, minmax(300px, 1fr))',
+			},
+			boxShadow: {
+				outline: '0 0 0 2px #ECA4BC, 0 0 10px #ECA4BC',
+				outlinedark: '0 0 0 2px #B3BBE4, 0 0 10px #B3BBE4',
+			},
 		},
 	},
 	plugins: [],

@@ -105,11 +105,13 @@ const { title } = Astro.props;
 	#project {
 			display: grid;
 			grid-template-columns: repeat(4, 1fr);
-			grid-template-rows: auto 86px 1fr;
+			grid-template-rows: auto 86px repeat(2, 1fr) 1fr;
 			grid-template-areas: 
 				"about about about about"
 				"theme theme link link"
-				"projects projects projects projects"
+				"p1 p1 p1 p1"
+				"p2 p2 p2 p2"
+				"small small small small"
 			;
 
 			gap: 17px;
@@ -130,11 +132,13 @@ const { title } = Astro.props;
 
 		#project {
 			grid-template-columns: repeat(4, 1fr);
-			grid-template-rows: 86px auto 1fr;
+			grid-template-rows: 86px auto repeat(2, 1fr) 1fr;
 			grid-template-areas: 
 				"about about about theme"
 				"about about about link"
-				"projects projects projects projects"
+				"p1 p1 p1 p1"
+				"p2 p2 p2 p2"
+				"small small small small"
 			;
 
 			gap: 17px;

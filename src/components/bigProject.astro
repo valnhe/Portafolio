@@ -1,16 +1,12 @@
 ---
-const {demo="#", name , desc , git="#"} = Astro.props
+const {name , desc } = Astro.props
 ---
 
-<div class="grid grid-cols-1 md:grid-cols-2 p-4 my-4 w-4/5 gap-6">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6 h-full">
     <slot name="image"/>
     <section>
         <h4 class="text-2xl font-bold">{name}</h4>
-        <p class="mt-1 mb-2 font-light text-gray-300 dark:text-zinc-300">{desc}</p>
+        <p class="mt-4">{desc}</p>
         <slot />
-        <nav class="flex gap-3 mt-2">
-                <a href={demo} target="_blank" class="w-auto px-5 py-1 text-center font-semibold text-bkg bg-tecnocolor border-2 border-transparent rounded-md border-tecnocolor hover:shadow-outline dark:hover:shadow-outlinedark transition-all ease-in-out delay-100 duration-5000">Demo</a>
-                <a href={git} target="_blank" class=" w-auto px-5 py-1 text-center font-semibold text-tecnocolor hover:text-bkg hover:bg-tecnocolor border-2 border-tecnocolor rounded-md transition-color ease-in-out delay-100 duration-500">Código</a>
-        </nav>
     </section>
 </div>

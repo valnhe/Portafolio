@@ -15,8 +15,8 @@ import Tailwindsvg from '../icons/Tailwindsvg.astro';
 <Layout title="valne | Projects">
     <main id="project">
         <section class="[grid-area:about] bg-aboutmecolor rounded-3xl p-8 shadow-lg">
-            <h1 class="text-3xl text-white text-bold">Valentina Castillo Valdés</h1>
-            <p class="text-white mt-3">Hola!</p>
+            <h1 class="text-3xl text-white font-semibold">Proyectos</h1>
+            <p class="text-white text-md mt-4">Me enfoco en fusionar la creatividad y la tecnología para ofrecer soluciones bonitas. 🩷</p>
             <Links/>
         </section>
         <section class="[grid-area:theme] bg-changecolor rounded-3xl shadow-lg grid place-items-center relative">
@@ -30,8 +30,28 @@ import Tailwindsvg from '../icons/Tailwindsvg.astro';
             </svg>
 			<span class="text-bkg ml-2">Regresar</span>
 		</a>  
-        <section class="[grid-area:projects] bg-changecolor rounded-3xl shadow-lg p-8 flex flex-col items-center justify-center text-white">
-            <h3 class="text-2xl font-medium self-start">Proyectos</h3>
+
+        <section class="[grid-area:p1] bg-tecnocolor text-bkg rounded-3xl shadow-lg p-8">
+            <BigProject
+                image="aca img",
+                name="Music App",
+                desc="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+                git="https://github.com/Valnhe"
+            >
+            <a href="https://github.com/Valnhe" target="_blank" slot="image">
+                <img src={prueba.src} alt="proyecto1">    
+            </a>
+            <p>jiijijiji</p>
+
+            <nav class="flex gap-3 mt-4">
+                <a href="#" target="_blank" class="w-auto px-5 py-1 text-center font-semibold border-3 border-white rounded-md shadow-sm">Demo</a>
+                <a href="#" target="_blank" class=" w-auto px-5 py-1 text-center font-semibold hover:text-bkg hover:bg-tecnocolor border-3 border-tecnocolor rounded-md transition-color ease-in-out delay-100 duration-500">Código</a>
+            </nav>
+
+            </BigProject>
+        </section>
+
+        <section class="[grid-area:p2] bg-aboutmecolor text-white rounded-3xl shadow-lg p-8">
             <BigProject
                 image="aca img",
                 name="Music App",
@@ -43,18 +63,9 @@ import Tailwindsvg from '../icons/Tailwindsvg.astro';
             </a>
             <p>jiijijiji</p>
             </BigProject>
-            <BigProject
-                image="acá img",
-                name="Weather App",
-                desc="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-                git="https://github.com/Valnhe"
-            >
-            <a href="https://github.com/Valnhe" target="_blank" slot="image">
-                <img src={prueba.src} alt="proyecto1">    
-            </a>
-            <p>oo</p>
-            </BigProject>
-            <section class="grid grid-cols-projectos self-center gap-3 md:gap-5 w-4/5 mt-4">
+        </section>
+
+        <section class="[grid-area:small] grid grid-cols-projectos self-center gap-3 rounded-3xl md:gap-5 p-8 bg-aboutmecolor">
             <SmallProject
                 name="Weather App",
                 desc="Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
@@ -82,9 +93,8 @@ import Tailwindsvg from '../icons/Tailwindsvg.astro';
             >
       
             </SmallProject>
-            </section>
-            <br>
         </section>
+        
     </main>
 </Layout>
 

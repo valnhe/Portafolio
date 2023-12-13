@@ -3,6 +3,13 @@ import Layout from '../layouts/Layout.astro';
 import Buttom from '../components/Button.astro';
 import BigProject from '../components/bigProject.astro';
 import SmallProject from '../components/smallProject.astro';
+import Links from '../components/Links.astro';
+
+import prueba from '../images/proyectos/prueba.png';
+
+import Astrosvg from '../icons/Astrosvg.astro';
+import Reactsvg from '../icons/Reactsvg.astro';
+import Tailwindsvg from '../icons/Tailwindsvg.astro';
 ---
 
 <Layout title="valne | Projects">
@@ -10,37 +17,7 @@ import SmallProject from '../components/smallProject.astro';
         <section class="[grid-area:about] bg-aboutmecolor rounded-3xl p-8 shadow-lg">
             <h1 class="text-3xl text-white text-bold">Valentina Castillo Valdés</h1>
             <p class="text-white mt-3">Hola!</p>
-            <ul class="mt-4">
-                <li class="inline">
-                    <a href="https://www.linkedin.com/in/valentina-castillo-valdes/" target="_blank">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-linkedin inline" width="35" height="35" viewBox="0 0 24 24" stroke-width="1.5" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                            <path d="M4 4m0 2a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2z" />
-                            <path d="M8 11l0 5" />
-                            <path d="M8 8l0 .01" />
-                            <path d="M12 16l0 -5" />
-                            <path d="M16 16v-3a2 2 0 0 0 -4 0" />
-                        </svg>
-                    </a>
-                </li>
-                <li class="inline p-2"> 
-                    <a href="https://github.com/Valnhe" target="_blank">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github inline" width="35" height="35" viewBox="0 0 24 24" stroke-width="1.5" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                            <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
-                        </svg>
-                    </a>
-                </li>
-                <li class="inline">
-                    <a href="/#email-zone">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-mail inline" width="35" height="35" viewBox="0 0 24 24" stroke-width="1.5" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                            <path d="M3 7a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-10z" />
-                            <path d="M3 7l9 6l9 -6" />
-                        </svg>
-                    </a>
-                </li>
-            </ul>
+            <Links/>
         </section>
         <section class="[grid-area:theme] bg-changecolor rounded-3xl shadow-lg grid place-items-center relative">
 			<Buttom/>
@@ -61,22 +38,10 @@ import SmallProject from '../components/smallProject.astro';
                 desc="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
                 git="https://github.com/Valnhe"
             >
-            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-linkedin inline" width="35" height="35" viewBox="0 0 24 24" stroke-width="1.5" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                <path d="M4 4m0 2a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2z" />
-                <path d="M8 11l0 5" />
-                <path d="M8 8l0 .01" />
-                <path d="M12 16l0 -5" />
-                <path d="M16 16v-3a2 2 0 0 0 -4 0" />
-            </svg>
-            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-linkedin inline" width="35" height="35" viewBox="0 0 24 24" stroke-width="1.5" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                <path d="M4 4m0 2a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2z" />
-                <path d="M8 11l0 5" />
-                <path d="M8 8l0 .01" />
-                <path d="M12 16l0 -5" />
-                <path d="M16 16v-3a2 2 0 0 0 -4 0" />
-            </svg>
+            <a href="https://github.com/Valnhe" target="_blank" slot="image">
+                <img src={prueba.src} alt="proyecto1">    
+            </a>
+            <p>jiijijiji</p>
             </BigProject>
             <BigProject
                 image="acá img",
@@ -84,70 +49,41 @@ import SmallProject from '../components/smallProject.astro';
                 desc="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
                 git="https://github.com/Valnhe"
             >
-            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-mail inline" width="35" height="35" viewBox="0 0 24 24" stroke-width="1.5" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                <path d="M3 7a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-10z" />
-                <path d="M3 7l9 6l9 -6" />
-            </svg>
-            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github inline" width="35" height="35" viewBox="0 0 24 24" stroke-width="1.5" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
-            </svg>
+            <a href="https://github.com/Valnhe" target="_blank" slot="image">
+                <img src={prueba.src} alt="proyecto1">    
+            </a>
+            <p>oo</p>
             </BigProject>
-            <section class="grid grid-cols-projectos self-start gap-3 md:gap-5 w-full mt-2">
+            <section class="grid grid-cols-projectos self-center gap-3 md:gap-5 w-4/5 mt-4">
             <SmallProject
                 name="Weather App",
                 desc="Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
                 git="https://github.com/Valnhe"
             >
-                
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github inline" width="35" height="35" viewBox="0 0 24 24" stroke-width="1.5" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                    <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
-                </svg>
+                 
             </SmallProject>
             <SmallProject
                 name="Weather App",
                 desc="Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
                 git="https://github.com/Valnhe"
             >
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-mail inline" width="35" height="35" viewBox="0 0 24 24" stroke-width="1.5" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                    <path d="M3 7a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-10z" />
-                    <path d="M3 7l9 6l9 -6" />
-                </svg>
             </SmallProject>
             <SmallProject
                 name="Weather App",
                 desc="Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
                 git="https://github.com/Valnhe"
             >
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-mail inline" width="35" height="35" viewBox="0 0 24 24" stroke-width="1.5" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                    <path d="M3 7a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-10z" />
-                    <path d="M3 7l9 6l9 -6" />
-                </svg>
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github inline" width="35" height="35" viewBox="0 0 24 24" stroke-width="1.5" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                    <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
-                </svg>
+
             </SmallProject>
             <SmallProject
                 name="Weather App",
                 desc="Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
                 git="https://github.com/Valnhe"
             >
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-mail inline" width="35" height="35" viewBox="0 0 24 24" stroke-width="1.5" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                    <path d="M3 7a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-10z" />
-                    <path d="M3 7l9 6l9 -6" />
-                </svg>
-                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github inline" width="35" height="35" viewBox="0 0 24 24" stroke-width="1.5" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                    <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
-                </svg>
+      
             </SmallProject>
             </section>
+            <br>
         </section>
     </main>
 </Layout>

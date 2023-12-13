@@ -3,29 +3,6 @@
     <span class="slider"></span>
 </label>
 
-<script is:inline>
-    const mainSection = document.getElementById("main-app");
-    const themeSelector = document.getElementById("theme-selector");
-
-        // Verificar el estado almacenado en localStorage al cargar la página
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme === 'dark') {
-        themeSelector.checked = true;
-        mainSection.dataset.theme = 'dark';
-        document.documentElement.classList.toggle('dark');
-    }
-
-    themeSelector.addEventListener('change', (e) => {
-        const theme = themeSelector.checked ? "dark" : "light";
-        mainSection.dataset.theme = theme;
-        document.documentElement.classList.toggle('dark');
-
-         // Guardar el estado en localStorage
-        localStorage.setItem('theme', theme);
-    });
-</script>
-
-
 <style>
     .switch input {
         display:none;
@@ -82,3 +59,54 @@
     }
 
 </style>
+
+
+
+<script>
+    document.addEventListener('astro:page-load', () => {
+
+        const mainSection = document.getElementById("main-app");
+        const themeSelector = document.getElementById("theme-selector") as HTMLInputElement;
+        const savedtheme = localStorage.getItem('theme');
+
+        if (savedtheme === "light") {
+            document.documentElement.classList.remove("dark");
+        } else {
+            themeSelector.checked = true;
+            document.documentElement.classList.add("dark");
+            mainSection.dataset.theme = 'dark';
+        }
+
+        window.localStorage.setItem("theme", savedtheme);
+
+        themeSelector.addEventListener('change', (e) => {
+
+            const theme = themeSelector.checked ? "dark" : "light";
+            mainSection.dataset.theme = theme;
+
+            document.documentElement.classList.toggle('dark');
+            mainSection.dataset.theme = theme
+            localStorage.setItem('theme', theme);
+        
+        });
+
+    });
+</script>
+
+
+<script>
+    document.addEventListener('astro:after-swap', () => {
+
+        const mainSection = document.getElementById("main-app");
+
+        if (localStorage.theme === 'dark') {
+            document.documentElement.classList.add("dark");
+            mainSection.dataset.theme = 'dark';
+        } else {
+            document.documentElement.classList.remove("dark");
+            mainSection.dataset.theme = 'light';
+        }
+
+      
+    });
+</script>

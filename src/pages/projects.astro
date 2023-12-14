@@ -1,10 +1,13 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import Buttom from '../components/Button.astro';
-import BigProject from '../components/bigProject.astro';
-import SmallProject from '../components/smallProject.astro';
-import Links from '../components/Links.astro';
-import Image from '../components/Image.astro';
+import About from '../components/About.astro';
+import Toggle from '../components/Toggle.astro';
+
+
+import BigProject from '../components/projects-page/bigProject.astro';
+import SmallProject from '../components/projects-page/smallProject.astro';
+import Links from '../components/projects-page/Links.astro';
+import Image from '../components/projects-page/Image.astro';
 
 import prueba from '../images/proyectos/prueba.png';
 import pueba from '../images/proyectos/pueba.png';
@@ -12,18 +15,18 @@ import pueba from '../images/proyectos/pueba.png';
 import Astrosvg from '../icons/Astrosvg.astro';
 import Reactsvg from '../icons/Reactsvg.astro';
 import Tailwindsvg from '../icons/Tailwindsvg.astro';
+
 ---
 
 <Layout title="valne | Projects">
     <main id="project">
-        <section class="[grid-area:about] bg-aboutmecolor rounded-3xl p-8 shadow-lg">
-            <h1 class="text-3xl text-white font-semibold">Proyectos</h1>
+        <About>
+			<h1 class="text-3xl text-white font-semibold">Proyectos</h1>
             <p class="text-white text-md mt-4">Me enfoco en fusionar la creatividad y la tecnología para ofrecer soluciones bonitas. 🩷</p>
             <Links/>
-        </section>
-        <section class="[grid-area:theme] bg-changecolor rounded-3xl shadow-lg grid place-items-center relative">
-			<Buttom/>
-		</section>
+		</About>
+        <Toggle/>
+
         <a href="/" class="[grid-area:link] bg-curriculumcolor rounded-3xl p-8 shadow-lg flex flex-wrap justify-center content-center cursor-pointer transition-transform ease-in-out delay-100 hover:scale-95 duration-500">
             <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-arrow-back-up inline stroke-bkg" width="25" height="25" viewBox="0 0 24 24" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
                 <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
@@ -53,8 +56,13 @@ import Tailwindsvg from '../icons/Tailwindsvg.astro';
                 </li>
             </Image>
             
-            <nav class="mt-3">
-                <button>ola</button>
+            <nav class="mt-3 lg:mt-5">
+                <a href="" class="bg-buttoncontact py-2 px-5 rounded-lg text-white shadow-sm font-semibold cursor-pointer border-2 border-transparent mr-3">
+                    Demo
+                </a>
+                <a href="" class="border-2 border-buttoncontact py-2 px-5 rounded-lg text-buttoncontact shadow-sm font-semibold cursor-pointer hover:bg-buttoncontact hover:text-white transition-colors ease-in-out duration-500 delay-100">
+                    Git
+                </a>
             </nav>
 
             </BigProject>
@@ -80,7 +88,7 @@ import Tailwindsvg from '../icons/Tailwindsvg.astro';
             </Image>
 
             <nav class="mt-3">
-                <button>ola</button>
+                <a href="" class="bg-buttoncontact w-1/2 p-2 rounded-lg text-white shadow-sm light float-right cursor-pointer">jj</a>
             </nav>
 
             </BigProject>
@@ -135,7 +143,6 @@ import Tailwindsvg from '../icons/Tailwindsvg.astro';
                 desc="Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
                 git="https://github.com/Valnhe"
             >
-      
             </SmallProject>
         </section>
         

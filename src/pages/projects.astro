@@ -3,11 +3,11 @@ import Layout from '../layouts/Layout.astro';
 import About from '../components/About.astro';
 import Toggle from '../components/Toggle.astro';
 
-
 import BigProject from '../components/projects-page/bigProject.astro';
 import SmallProject from '../components/projects-page/smallProject.astro';
 import Links from '../components/projects-page/Links.astro';
 import Image from '../components/projects-page/Image.astro';
+import BlackButton from '../components/projects-page/BlackButton.astro';
 
 import prueba from '../images/proyectos/prueba.png';
 import pueba from '../images/proyectos/pueba.png';
@@ -55,47 +55,14 @@ import Tailwindsvg from '../icons/Tailwindsvg.astro';
                     <Astrosvg/>
                 </li>
             </Image>
-            
-            <nav class="mt-3 lg:mt-5">
-                <a href="" class="bg-buttoncontact py-2 px-5 rounded-lg text-white shadow-sm font-semibold cursor-pointer border-2 border-transparent mr-3">
-                    Demo
-                </a>
-                <a href="" class="border-2 border-buttoncontact py-2 px-5 rounded-lg text-buttoncontact shadow-sm font-semibold cursor-pointer hover:bg-buttoncontact hover:text-white transition-colors ease-in-out duration-500 delay-100">
-                    Git
-                </a>
-            </nav>
+
+            <BlackButton/>
 
             </BigProject>
         </section>
 
         <!-- Proyecto 2 -->
-        <section class="[grid-area:p2] bg-aboutmecolor text-white rounded-3xl shadow-lg p-8">
-            <BigProject
-                name="Test",
-                desc="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-                git="https://github.com/Valnhe"
-            >
-            <Image slot="image" link="https://github.com/Valnhe" image={pueba.src}> 
-                <li class="mr-2">
-                    <Reactsvg/>
-                </li>
-                <li class="mr-2">
-                    <Tailwindsvg/>
-                </li>
-                <li class="mr-2">
-                    <Astrosvg/>
-                </li>
-            </Image>
-
-            <nav class="mt-3">
-                <a href="" class="bg-buttoncontact w-1/2 p-2 rounded-lg text-white shadow-sm light float-right cursor-pointer">jj</a>
-            </nav>
-
-            </BigProject>
-        </section>
-
-        <!-- Proyecto 3 -->
-        <section class="[grid-area:p3] bg-curriculumcolor text-bkg rounded-3xl shadow-lg p-8">
+        <section class="[grid-area:p2] bg-curriculumcolor text-bkg rounded-3xl shadow-lg p-8">
             <BigProject
                 name="Test",
                 desc="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
@@ -110,39 +77,29 @@ import Tailwindsvg from '../icons/Tailwindsvg.astro';
                 </li>
             </Image>
 
-            <nav class="mt-3">
-                <button>ola</button>
-            </nav>
+            <BlackButton/>
 
             </BigProject>
         </section>
 
-        <section class="[grid-area:small] grid grid-cols-projectos self-center gap-3 rounded-3xl md:gap-5 p-8 bg-aboutmecolor">
+        <section class="[grid-area:small] grid grid-cols-projectos gap-3 md:block self-center rounded-3xl p-8 bg-aboutmecolor h-full">
             <SmallProject
                 name="Test",
-                desc="Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
                 git="https://github.com/Valnhe"
             >
-                 
+            jojojo
             </SmallProject>
             <SmallProject
                 name="Test",
-                desc="Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
                 git="https://github.com/Valnhe"
             >
+            jijiji
             </SmallProject>
             <SmallProject
                 name="Test",
-                desc="Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
                 git="https://github.com/Valnhe"
             >
-
-            </SmallProject>
-            <SmallProject
-                name="Test",
-                desc="Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-                git="https://github.com/Valnhe"
-            >
+            jujuuj
             </SmallProject>
         </section>
         

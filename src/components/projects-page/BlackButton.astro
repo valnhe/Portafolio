@@ -1,0 +1,11 @@
+---
+const {demo="#",code="#"} = Astro.props;
+---
+<nav class="mt-4 flex justify-center lg:mt-5 lg:justify-end">
+    <a href={demo} class="bg-buttoncontact py-2 px-5 rounded-lg text-white shadow-sm font-semibold cursor-pointer border-2 border-transparent mr-3">
+        Demo
+    </a>
+    <a href={code} class="border-2 border-buttoncontact py-2 px-5 rounded-lg text-buttoncontact shadow-sm font-semibold cursor-pointer hover:bg-buttoncontact hover:text-white transition-colors ease-in-out duration-500 delay-100">
+        Código
+    </a>
+</nav>

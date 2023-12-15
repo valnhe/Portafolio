@@ -17,7 +17,7 @@ export default {
 
 			},
 			gridTemplateColumns: {
-					'projectos': 'repeat(auto-fit, minmax(min(300px, 100%), 1fr))',
+					'projectos': 'repeat(auto-fit, minmax(min(300px,100%), 1fr))',
 			},
 			boxShadow: {
 				outline: '0 0 0 2px #ECA4BC, 0 0 10px #ECA4BC',

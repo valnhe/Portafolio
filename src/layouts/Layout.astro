@@ -118,7 +118,6 @@ const { title } = Astro.props;
 				"theme theme theme link"
 				"p1 p1 p1 p1"
 				"p2 p2 p2 p2"
-				"p3 p3 p3 p3"
 				"small small small small"
 			;
 
@@ -140,14 +139,12 @@ const { title } = Astro.props;
 
 		#project {
 			grid-template-columns: repeat(4, 1fr);
-			grid-template-rows: 86px auto repeat(4, 1fr);
+			grid-template-rows: 86px auto auto auto;
 			grid-template-areas: 
 				"about about about theme"
 				"about about about link"
-				"p1 p1 p1 p1"
-				"p2 p2 p2 p2"
-				"p3 p3 p3 p3"
-				"small small small small"
+				"p1 p1 small small"
+				"p2 p2 small small"
 			;
 
 			gap: 17px;

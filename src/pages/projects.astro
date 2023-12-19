@@ -83,20 +83,24 @@ import Tailwindsvg from '../icons/Tailwindsvg.astro';
         </section>
 
         <section class="[grid-area:small] grid grid-cols-projectos gap-3 md:block self-center rounded-3xl p-8 bg-aboutmecolor h-full">
+            <!-- Proyecto 1 -->
+            <SmallProject
+                name="Translate App",
+                git="https://translate-app-valnhe.netlify.app">
+                <p>Una aplicación de traducción realizada con <strong>React</strong>, <strong>Tailwind</strong> y <strong>Vite</strong>.</p>
+                <p class="mt-2">La aplicación utiliza la API de My Memory para traducir el texto ingresado al idioma seleccionado. ¡También permite copiar y escuchar el texto ingresado y traducido! 🌎</p>
+                <p class="mt-2 float-right">Desafío de <strong>devChallenges.io</strong></p>
+            </SmallProject>
+
+            <!-- Proyecto 2 -->
             <SmallProject
                 name="Simple Coffee Listing",
-                git="https://simple-coffee-listing-valnhe.netlify.app"
-            >
-            <p>Un pequeño proyecto realizado con <strong>React</strong> y <strong>Vite</strong>. </p>
-            <p class="mt-2">Simplemente lista los cafés que se encuentran en un archivo JSON mediante el uso de un componente de tarjeta (card), ofreciendo la posibilidad de filtrar los cafés según su disponibilidad. ☕</p>
-            
+                git="https://simple-coffee-listing-valnhe.netlify.app">
+                <p>Un pequeño proyecto realizado con <strong>React</strong> y <strong>Vite</strong>. </p>
+                <p class="mt-2">Simplemente lista los cafés que se encuentran en un archivo JSON mediante el uso de un componente de tarjeta (card), ofreciendo la posibilidad de filtrar los cafés según su disponibilidad. ☕</p>
+                <p class="mt-2 float-right">Desafío de <strong>devChallenges.io</strong></p>
             </SmallProject>
-            <SmallProject
-                name="Test",
-                git="https://github.com/Valnhe"
-            >
-            Una pequeña descripción
-            </SmallProject>
+
             <SmallProject
                 name="Test",
                 git="https://github.com/Valnhe"

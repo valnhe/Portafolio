@@ -1,5 +1,7 @@
 ---
 import { ViewTransitions } from 'astro:transitions';
+import { SEO } from 'astro-seo';
+import type { Code } from 'astro:components';
 
 
 interface Props {
@@ -12,15 +14,26 @@ const { title } = Astro.props;
 <!doctype html>
 <html lang="en" id="main-app">
 	<head>
-		<meta charset="UTF-8" />
-		<meta name="description" content="Me enfoco en fusionar la creatividad y la tecnología para ofrecer soluciones bonitas. 🩷" />
+		<SEO 
+			title={title} 
+			description="Me enfoco en fusionar la creatividad y la tecnología para ofrecer soluciones bonitas. 🩷"
+			charset="UTF-8"
+			openGraph={{
+				basic: {
+					title: title,
+					type: "website",
+					image: "https://i.imgur.com/y2L11w6.jpg",
+				}
+			}}
+		
+		/>
+
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/1F338.svg" />
 		<link rel="preconnect" href="https://fonts.googleapis.com">
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
 		<meta name="generator" content={Astro.generator} />
-		<title>{title}</title>
 		<ViewTransitions />
 	</head>
 	<body class="bg-bkg transition-color ease-in-out duration-200">

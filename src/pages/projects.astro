@@ -9,16 +9,17 @@ import Links from '../components/projects-page/Links.astro';
 import Image from '../components/projects-page/Image.astro';
 import BlackButton from '../components/projects-page/BlackButton.astro';
 
-import prueba from '../images/proyectos/prueba.png';
-import pueba from '../images/proyectos/pueba.png';
+import proyect1 from '../images/proyectos/proyecto1.webp';
 
 import Astrosvg from '../icons/Astrosvg.astro';
 import Reactsvg from '../icons/Reactsvg.astro';
 import Tailwindsvg from '../icons/Tailwindsvg.astro';
+import TagSmall from '../components/projects-page/TagSmallProject.astro';
+import TagBig from '../components/projects-page/TagsBigProjects.astro';
 
 ---
 
-<Layout title="valne | Projects">
+<Layout title="valne | Projects - Estudiante de Ing.Informática con interés en el Desarrollo Web">
     <main id="project">
         <About>
 			<h1 class="text-3xl text-white font-semibold">Proyectos</h1>
@@ -39,12 +40,11 @@ import Tailwindsvg from '../icons/Tailwindsvg.astro';
          <!-- Proyecto 1 -->
         <section class="[grid-area:p1] bg-tecnocolor text-bkg rounded-3xl shadow-lg p-8">
             <BigProject
-                name="Test",
-                desc="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-                git="https://github.com/Valnhe"
-            >
+                name="World Ranks - Country Page",
+                desc="La página utiliza la API de Countries para listar información sobre las diversas naciones del mundo, ofreciendo la posibilidad de filtrar estos países mediante diversas opciones. Junto a esto, gracias a Astro, se implementaron rutas dinámicas para ver información más detallada sobre cada uno de los países. 🌍"
+            > 
 
-                <Image slot="image" link="https://github.com/Valnhe" image={prueba.src}> 
+                <Image slot="image" link="https://world-rank-valnhe.netlify.app" image={proyect1.src}> 
                     <li class="mr-2">
                         <Reactsvg/>
                     </li>
@@ -56,71 +56,91 @@ import Tailwindsvg from '../icons/Tailwindsvg.astro';
                     </li>
                 </Image>
 
-                <BlackButton/>
+                <BlackButton slot="buttons" demo={"https://world-rank-valnhe.netlify.app"} code="https://github.com/valnhe/World-Ranks"/>
+            
+                <ul class="flex justify-end gap-2">
+                    <TagBig label="astro"/>
+                    <TagBig label="react"/>
+                    <TagBig label="tailwind"/>
+                </ul>
 
             </BigProject>
         </section>
 
         <!-- Proyecto 2 -->
-        <section class="[grid-area:p2] bg-curriculumcolor text-bkg rounded-3xl shadow-lg p-8">
+        <section class="[grid-area:p2] bg-discordcolor text-bkg rounded-3xl shadow-lg p-8">
             <BigProject
                 name="Test",
-                desc="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-                git="https://github.com/Valnhe"
-            >
-                <Image slot="image" link="https://github.com/Valnhe" image={prueba.src}> 
+                desc="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+            > 
+
+                <Image slot="image" link="https://world-rank-valnhe.netlify.app" image={proyect1.src}> 
                     <li class="mr-2">
                         <Reactsvg/>
                     </li>
                     <li class="mr-2">
                         <Tailwindsvg/>
                     </li>
+                    <li class="mr-2">
+                        <Astrosvg/>
+                    </li>
                 </Image>
 
-                <BlackButton/>
+                <BlackButton slot="buttons" demo={"https://world-rank-valnhe.netlify.app"} code="https://github.com/valnhe/World-Ranks"/>
+            
+                <ul class="flex justify-end gap-2">
+                    <TagBig label="astro"/>
+                    <TagBig label="react"/>
+                    <TagBig label="tailwind"/>
+                </ul>
 
             </BigProject>
         </section>
 
+        <!-- Proyectos Pequeños -->
         <section class="[grid-area:small] grid grid-cols-projectos gap-3 md:block self-center rounded-3xl p-8 bg-aboutmecolor h-full">
             <!-- Proyecto 1 -->
             <SmallProject
                 name="Translate App",
-                git="https://translate-app-valnhe.netlify.app">
+                git="https://translate-app-valnhe.netlify.app",
+                desc="La página utiliza la API de My Memory para traducir el texto ingresado al idioma seleccionado. ¡También permite copiar y escuchar el texto ingresado y traducido! 🌎"
+                >
 
-                <p>Una aplicación de traducción realizada con <strong>React</strong>, <strong>Tailwind</strong> y <strong>Vite</strong>.</p>
-                <p class="mt-2">La aplicación utiliza la API de My Memory para traducir el texto ingresado al idioma seleccionado. ¡También permite copiar y escuchar el texto ingresado y traducido! 🌎</p>
-                <p class="mt-2 float-right">Desafío de <strong>devChallenges.io</strong></p>
+                <ul class="flex justify-end gap-2">
+                    <TagSmall label="react"/>
+                    <TagSmall label="tailwind"/>
+                    <TagSmall label="vitejs"/>
+                </ul>
+                
             </SmallProject>
 
             <!-- Proyecto 2 -->
             <SmallProject
                 name="GitHub Profile Visualizer",
-                git="https://github-profile-valnhe.netlify.app">
+                git="https://github-profile-valnhe.netlify.app",
+                desc="La página utiliza la API de GitHub para visualizar el perfil del usuario buscado, mostrando información detallada como el número de seguidores, la cantidad de personas a las que sigue y su ubicación. Además, también muestra información sobre los distintos repositorios del usuario en cuestión. 🖥️"
+                >
             
-                <p>Una aplicación de traducción realizada con <strong>React</strong>, <strong>Tailwind</strong> y <strong>Vite</strong>.</p>
-                <p class="mt-2">La aplicación utiliza la API de GitHub para visualizar el perfil del usuario buscado, mostrando información detallada como el número de seguidores, la cantidad de personas a las que sigue y su ubicación. Además, también muestra información sobre los distintos repositorios del usuario en cuestión. 🖥️</p>
-                <p class="mt-2 float-right">Desafío de <strong>devChallenges.io</strong></p>
+                <ul class="flex justify-end gap-2">
+                    <TagSmall label="react"/>
+                    <TagSmall label="tailwind"/>
+                    <TagSmall label="vitejs"/>
+                </ul>
+
             </SmallProject>
 
             <!-- Proyecto 3 -->
             <SmallProject
                 name="Simple Coffee Listing",
-                git="https://simple-coffee-listing-valnhe.netlify.app">
-
-                <p>Un pequeño proyecto realizado con <strong>React</strong> y <strong>Vite</strong>. </p>
-                <p class="mt-2">Simplemente lista los cafés que se encuentran en un archivo JSON mediante el uso de un componente de tarjeta (card), ofreciendo la posibilidad de filtrar los cafés según su disponibilidad. ☕</p>
-                <p class="mt-2 float-right">Desafío de <strong>devChallenges.io</strong></p>
-            </SmallProject>
-
-            <!-- Proyecto 4 -->
-            <SmallProject
-                name="Test",
-                git="https://simple-coffee-listing-valnhe.netlify.app">
-
+                git="https://simple-coffee-listing-valnhe.netlify.app",
+                desc="Simplemente lista los cafés que se encuentran en un archivo JSON mediante el uso de un componente de tarjeta (card), ofreciendo la posibilidad de filtrar los cafés según su disponibilidad. ☕"
+                >
                 
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-            
+                <ul class="flex justify-end gap-2">
+                    <TagSmall label="react"/>
+                    <TagSmall label="vitejs"/>
+                </ul>
+
             </SmallProject>
             
         </section>

@@ -2,11 +2,9 @@
 const {link, image} = Astro.props;
 ---
 <section class="flex flex-col">
-    <a href={link} target="_blank" class="relative group w-auto aspect-[15/7] overflow-hidden flex-shrink-0 md:flex-shrink">
-        <img src={image} alt="proyecto1" class="z-0 absolute rounded-t-xl object-cover">    
+    <a href={link} target="_blank" class="relative group w-auto aspect-video rounded-xl overflow-hidden flex-shrink-0 md:flex-shrink">
+        <img src={image} alt="proyecto1" class="z-0 absolute object-cover aspect-video">    
         <svg stroke="#fff" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" class="z-10 text-xl absolute top-3 right-4 scale-0 group-hover:scale-90 transition-all ease-in-out duration-[400ms]" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
     </a>
-    <ul class="flex flex-wrap bg-zinc-100 dark:bg-bkg p-2 justify-center rounded-b-xl">
-        <slot />
-    </ul>
+    
 </section>

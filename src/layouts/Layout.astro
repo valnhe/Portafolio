@@ -83,26 +83,16 @@ const { title } = Astro.props;
 	@layer base {
 		:root {
 			--color-bkg: 255 255 254;
-			--color-aboutmecolor: 35 41 70;
-			--color-curriculumcolor: 179 187 228;
-			--color-changecolor: 35 41 70;
-			--color-tecnocolor: 236 164 188;
-			--color-discordcolor: 179 187 228;
-			--color-hourcolor: 35 41 70;
-			--color-contact: 236 164 188;
-			--color-buttoncontact: 35 41 70;
+			--color-primarycolor: 35 41 70;
+			--color-secondarycolor: 179 187 228;
+			--color-ternarycolor: 236 164 188;
 		}
 
 		:root[data-theme="dark"]{
 			--color-bkg: 63 55 98;
-			--color-aboutmecolor: 53 45 83;
-			--color-curriculumcolor: 236 164 188;
-			--color-changecolor: 53 45 83;
-			--color-tecnocolor: 179 187 228;
-			--color-discordcolor: 236 164 188;
-			--color-hourcolor: 53 45 83;
-			--color-contact: 179 187 228;
-			--color-buttoncontact: 53 45 83;
+			--color-primarycolor: 53 45 83;
+			--color-secondarycolor: 236 164 188;
+			--color-ternarycolor: 179 187 228;
 		}
 	}
 
@@ -114,7 +104,7 @@ const { title } = Astro.props;
 			"cv cv theme"
 			"tecno tecno tecno"
 			"project project project"
-			"hour discord discord"
+			"github linkedin linkedin"
 			"email email email"
 			;
 
@@ -146,7 +136,7 @@ const { title } = Astro.props;
 				"about about about picture"
 				"cv tecno tecno tecno"
 				"theme tecno tecno tecno"
-				"project project discord hour"
+				"project project linkedin github"
 				"email email email email"
 			;
 		}

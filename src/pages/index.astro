@@ -5,10 +5,14 @@ import Picture from '../components/index-page/PictureCard.astro';
 import Curriculum from '../components/index-page/CurriculumCard.astro';
 import Toggle from '../components/Toggle.astro'
 import Tecno from "../components/index-page/TecnoCard.astro";
-import ProjectsCard from '../components/index-page/ProjectsCard.astro';
-import LinkedIn from '../components/index-page/LinkedInCard.astro';
-import GitHub from '../components/index-page/GitHubCard.astro';
 import Email from '../components/index-page/EmailCard.astro';
+
+import LinksCard from '../components/index-page/LinksCard.astro';
+
+import staticGit from "../images/githubIcon.webp"
+import lightLinkedin from "../images/linkedin.webp"
+import darkLinkedin from "../images/linkedindark.webp"
+import gifComputer from "../images/computer1.gif";
 ---
 
 <Layout title="valnhe | Porfolio - Estudiante de Ing.Informática con interés en el Desarrollo Web">
@@ -20,13 +24,40 @@ import Email from '../components/index-page/EmailCard.astro';
 			<p class="text-white text-md mt-5">Me enfoco en fusionar la creatividad y la tecnología para ofrecer soluciones bonitas. 🩷</p>
 			<p class="text-white text-md mt-2 text-end">@valnhe</p>
 		</AboutMe>
+
 		<Picture/>
 		<Curriculum/>
 		<Toggle/>
 		<Tecno/>
-		<ProjectsCard/>
-		<LinkedIn/>
-		<GitHub/>
+
+		<LinksCard
+			link="/projects"
+			alt="Proyectos"
+			img={gifComputer.src}
+			class="[grid-area:project]"
+			classImage="blur-[1px] object-cover"
+		>
+			<h3 class="mt-[153px] text-xl font-semibold">Proyectos</h3>
+        	<p>Ve los proyectos que he realizado 🩷 </p>
+		</LinksCard>
+
+		<LinksCard
+			link="https://github.com/valnhe"
+			alt="GitHub Logo"
+			img={staticGit.src}
+			class="[grid-area:github] bg-primarycolor 2xl:aspect-square"
+			classImage="object-contain"
+		/>
+
+		<LinksCard
+			link="https://www.linkedin.com/in/valentina-castillo-valdes/"
+			alt="LinkedIn Logo"
+			img={darkLinkedin.src}
+			img2={lightLinkedin.src}
+			class="[grid-area:linkedin] bg-secondarycolor 2xl:aspect-square"
+			classImage="object-contain"
+		/>
+		
 		<Email/>
 	</main>
 </Layout>

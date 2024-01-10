@@ -1,8 +1,11 @@
 ---
-import me from "../../images/me.gif"
+import me from "../../images/me.png"
+import darktheme from "../../images/medarktheme.webp"
+import whitetheme from "../../images/mewhitetheme.webp"
 ---
 
-<section class="md:[grid-area:picture] bg-bkg rounded-3xl hidden lg:block overflow-hidden shadow-lg 2xl:aspect-square relative">
-    <img src={me.src} alt="Computer Gif" class="object-cover object-center h-full w-full blur-[1px]">
-    <p class="z-10 p-4 text-white absolute bottom-3 left-3">Foto provisional 💀</p>
+<section class="md:[grid-area:picture] bg-primarycolor rounded-3xl hidden lg:block overflow-hidden shadow-lg 2xl:aspect-square relative">
+    <img src={darktheme.src} alt="Computer Gif" class="object-cover hidden dark:block object-right-top h-full w-full z-10">
+    <img src={whitetheme.src} alt="Computer Gif" class="object-cover block dark:hidden object-right-top h-full w-full z-10">
+    
 </section>

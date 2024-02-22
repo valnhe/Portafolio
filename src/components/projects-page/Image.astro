@@ -2,8 +2,8 @@
 const {link, image} = Astro.props;
 ---
 <section class="flex flex-col">
-    <a href={link} target="_blank" class="relative will-change-transform group w-auto aspect-video rounded-xl overflow-hidden flex-shrink-0 md:flex-shrink">
-        <img src={image} alt="proyecto1" class="z-0 absolute object-cover object-left-top aspect-video transition-transform group-hover:scale-110 duration-1000">    
+    <a href={link} target="_blank" class="bg-primarycolor relative will-change-transform group w-auto aspect-video rounded-xl overflow-hidden flex-shrink-0 md:flex-shrink">
+        <img src={image} alt="proyecto1" class="will-change-transform z-0 absolute object-cover object-center aspect-video transition-transform group-hover:scale-110 duration-1000">    
         <svg stroke="#fff" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" class="z-10 text-xl absolute top-3 right-4 scale-0 group-hover:scale-90 transition-all ease-in-out duration-[400ms]" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
     </a>
     

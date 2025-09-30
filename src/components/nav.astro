@@ -1,0 +1,93 @@
+<!-- NAV (igual que antes) -->
+<nav class="[grid-area:nav] bg-ternarycolor text-primarycolor rounded-3xl shadow-lg px-4 md:px-8 py-4">
+  <div class="mx-auto flex items-center justify-between">
+    <a class="font-bold text-lg" href="/">valnhe</a>
+    <button id="nav-toggle" class="sm:inline-flex md:hidden items-center justify-center rounded-xl p-2 focus:outline-none"
+            aria-label="Abrir menú" aria-controls="nav-menu" aria-expanded="false">
+      <svg id="icon-open" xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+      </svg>
+      <svg id="icon-close" xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+      </svg>
+    </button>
+
+    <div class="hidden md:!flex gap-6">
+      <a href="/projects">Proyectos</a>
+      <!--<a href="/about-me">Sobre mí</a>-->
+      <a href="/#email-zone">Contacto</a>
+    </div>
+  </div>
+</nav>
+
+<!-- OVERLAY FULL SCREEN LIMPIO -->
+<div
+  id="nav-menu"
+  class="fixed inset-0 z-[60] md:hidden opacity-0 transition-opacity duration-300 ease-out
+         bg-ternarycolor text-primarycolor"
+  aria-hidden="true"
+>
+  <!-- Header del overlay (plano, sin bordes redondeados) -->
+  <div class="flex items-center justify-between px-5 py-4">
+    <span class="font-bold text-lg">valnhe</span>
+    <button id="nav-close" class="p-2 rounded-lg focus:outline-none" aria-label="Cerrar menú">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+      </svg>
+    </button>
+  </div>
+
+  <!-- Links centrados -->
+  <div class="h-[calc(100vh-56px)] flex flex-col items-center justify-center gap-10">
+    <a href="/projects"    class="nav-link text-2xl">Proyectos</a>
+   <!-- <a href="/about-me"    class="nav-link text-2xl">Sobre mí</a>-->
+    <a href="/#email-zone" class="nav-link text-2xl">Contacto</a>
+  </div>
+</div>
+
+<script type="module">
+  const btn = document.getElementById('nav-toggle');
+  const menu = document.getElementById('nav-menu');
+  const closeBtn = document.getElementById('nav-close');
+  const iconOpen = document.getElementById('icon-open');
+  const iconClose = document.getElementById('icon-close');
+
+  const lockScroll = (lock) => {
+    document.documentElement.classList.toggle('overflow-hidden', lock);
+    document.body.classList.toggle('overflow-hidden', lock);
+  };
+
+  function setExpanded(expanded) {
+    btn?.setAttribute('aria-expanded', String(expanded));
+    menu?.setAttribute('aria-hidden', String(!expanded));
+    iconOpen?.classList.toggle('hidden', expanded);
+    iconClose?.classList.toggle('hidden', !expanded);
+
+    if (expanded) {
+      menu?.classList.remove('hidden');
+      requestAnimationFrame(() => menu?.classList.remove('opacity-0'));
+    } else {
+      menu?.classList.add('opacity-0');
+      setTimeout(() => menu?.classList.add('hidden'), 250);
+    }
+    lockScroll(expanded);
+  }
+
+  btn?.addEventListener('click', () => {
+    const expanded = btn.getAttribute('aria-expanded') === 'true';
+    setExpanded(!expanded);
+  });
+
+  closeBtn?.addEventListener('click', () => setExpanded(false));
+
+  menu?.querySelectorAll('a').forEach(a => a.addEventListener('click', () => setExpanded(false)));
+
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') setExpanded(false); });
+
+  document.addEventListener('click', (e) => {
+    const path = e.composedPath();
+    if (btn && menu && !menu.classList.contains('hidden')) {
+      if (!path.includes(menu) && !path.includes(btn)) setExpanded(false);
+    }
+  });
+</script>

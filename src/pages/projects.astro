@@ -10,10 +10,8 @@ import Image from '../components/projects-page/Image.astro';
 import BlackButton from '../components/projects-page/BlackButton.astro';
 
 import proyect1 from '../images/proyectos/proyecto1.webp';
+import proyect2 from '../images/proyectos/teachear.png';
 
-import Astrosvg from '../icons/Astrosvg.astro';
-import Reactsvg from '../icons/Reactsvg.astro';
-import Tailwindsvg from '../icons/Tailwindsvg.astro';
 import TagSmall from '../components/projects-page/TagSmallProject.astro';
 import TagBig from '../components/projects-page/TagsBigProjects.astro';
 
@@ -44,18 +42,8 @@ import TagBig from '../components/projects-page/TagsBigProjects.astro';
                 desc="La página utiliza la API de Countries para listar información sobre las diversas naciones del mundo, ofreciendo la posibilidad de filtrar estos países mediante diversas opciones. Junto a esto, gracias a Astro, se implementaron rutas dinámicas para ver información más detallada sobre cada uno de los países. 🌍"
             > 
 
-                <Image slot="image" link="https://world-rank-valnhe.netlify.app" image={proyect1.src}> 
-                    <li class="mr-2">
-                        <Reactsvg/>
-                    </li>
-                    <li class="mr-2">
-                        <Tailwindsvg/>
-                    </li>
-                    <li class="mr-2">
-                        <Astrosvg/>
-                    </li>
-                </Image>
-
+                <Image slot="image" link="https://world-rank-valnhe.netlify.app" image={proyect1.src}/> 
+            
                 <BlackButton slot="buttons" demo={"https://world-rank-valnhe.netlify.app"} code="https://github.com/valnhe/World-Ranks"/>
             
                 <ul class="flex justify-end gap-2">
@@ -70,28 +58,19 @@ import TagBig from '../components/projects-page/TagsBigProjects.astro';
         <!-- Proyecto 2 -->
         <section class="[grid-area:p2] bg-secondarycolor text-bkg rounded-3xl shadow-lg p-8">
             <BigProject
-                name="Test",
-                desc="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+                name="TeacHear",
+                desc="Aplicación web que utiliza IA para apoyar la evaluación del dominio lector en estudiantes de educación básica. Genera reportes automáticos y planes de acción personalizados para docentes, reduciendo tiempos de corrección y facilitando el seguimiento de cada alumno. Presentado en la 33ª Feria de Software de la Universidad Técnica Federico Santa María. 📚"
             > 
 
-                <Image slot="image" link="https://world-rank-valnhe.netlify.app" image={proyect1.src}> 
-                    <li class="mr-2">
-                        <Reactsvg/>
-                    </li>
-                    <li class="mr-2">
-                        <Tailwindsvg/>
-                    </li>
-                    <li class="mr-2">
-                        <Astrosvg/>
-                    </li>
-                </Image>
+                <Image slot="image" link="https://world-rank-valnhe.netlify.app" image={proyect2.src}/> 
 
-                <BlackButton slot="buttons" demo={"https://world-rank-valnhe.netlify.app"} code="https://github.com/valnhe/World-Ranks"/>
+                <BlackButton slot="buttons" demo={"https://teachear.feriadesoftware.cl/"} code="https://www.instagram.com/teachear.cl/"/>
             
                 <ul class="flex justify-end gap-2">
-                    <TagBig label="astro"/>
-                    <TagBig label="react"/>
+                    <TagBig label="nextjs"/>
+                    <TagBig label="material ui"/>
                     <TagBig label="tailwind"/>
+                    <TagBig label="mongodb"/>
                 </ul>
 
             </BigProject>
@@ -99,6 +78,37 @@ import TagBig from '../components/projects-page/TagsBigProjects.astro';
 
         <!-- Proyectos Pequeños -->
         <section class="[grid-area:small] grid grid-cols-projectos gap-3 md:block self-center rounded-3xl p-8 bg-primarycolor h-full">
+
+            <!-- Proyecto 0 -->
+            <SmallProject
+                name=" Orienteering Tour Problem With Hotel Selection",
+                git="https://github.com/valnhe/Proyecto-Inteligencia-Artificial",
+                desc="Este proyecto implementa una solución para el Orienteering Tour Problem With Hotel Selection en C++ a través de Hill Climbing con Mejor Mejora. Proyecto del ramo Inteligencia Artificial. 🤖"
+                >
+
+                <ul class="flex justify-end gap-2">
+                    <TagSmall label="C++"/>
+                </ul>
+                
+            </SmallProject>
+
+            <!-- Proyecto 0.0 -->
+            <SmallProject
+                name="LogisticaGlobal",
+                git="https://github.com/Equipo-3-Pruebas-de-Software/LogisticaGlobal",
+                desc="Aplicación web diseñada para facilitar el registro, clasificación y seguimiento de los incidentes ocurridos en los robots de inventario en el almacén de LogisticaGlobal. Proyecto del ramo Pruebas de Software. ⌨️"
+                >
+
+                <ul class="flex justify-end gap-2">
+                    <TagSmall label="vite"/>
+                    <TagSmall label="react"/>
+                    <TagSmall label="node.js"/>
+                    <TagSmall label="mysql"/>
+                    <TagSmall label="cypress"/>
+                </ul>
+                
+            </SmallProject>
+
             <!-- Proyecto 1 -->
             <SmallProject
                 name="Translate App",

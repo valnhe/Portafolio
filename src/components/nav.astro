@@ -1,36 +1,33 @@
-<!-- NAV (igual que antes) -->
-<nav class="[grid-area:nav] bg-ternarycolor text-primarycolor rounded-3xl shadow-lg px-4 md:px-8 py-4">
-  <div class="mx-auto flex items-center justify-between">
-    <a class="font-bold text-lg" href="/">valnhe</a>
-    <button id="nav-toggle" class="sm:inline-flex md:hidden items-center justify-center rounded-xl p-2 focus:outline-none"
-            aria-label="Abrir menú" aria-controls="nav-menu" aria-expanded="false">
-      <svg id="icon-open" xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
-      </svg>
-      <svg id="icon-close" xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
-      </svg>
-    </button>
+<!-- NAV Cel -->
+<nav class="[grid-area:nav] bg-ternarycolor text-primarycolor rounded-3xl shadow-lg px-4 py-4
+            flex items-center justify-between lg:!hidden">
+  <a href="/" class="font-bold">valnhe</a>
 
-    <div class="hidden md:!flex gap-6">
-      <a href="/projects">Proyectos</a>
-      <!--<a href="/about-me">Sobre mí</a>-->
-      <a href="/#email-zone">Contacto</a>
-    </div>
-  </div>
+  <!-- Botón hamburguesa -->
+  <button id="nav-toggle"
+          class="inline-flex items-center justify-center rounded-xl p-2 focus:outline-none focus:ring-2 focus:ring-primarycolor/50"
+          aria-label="Abrir menú" aria-controls="nav-menu" aria-expanded="false">
+    <!-- icono abrir -->
+    <svg id="icon-open" xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+    </svg>
+    <!-- icono cerrar -->
+    <svg id="icon-close" xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+    </svg>
+  </button>
 </nav>
 
-<!-- OVERLAY FULL SCREEN LIMPIO -->
-<div
-  id="nav-menu"
-  class="fixed inset-0 z-[60] md:hidden opacity-0 transition-opacity duration-300 ease-out
-         bg-ternarycolor text-primarycolor"
-  aria-hidden="true"
->
-  <!-- Header del overlay (plano, sin bordes redondeados) -->
-  <div class="flex items-center justify-between px-5 py-4">
-    <span class="font-bold text-lg">valnhe</span>
-    <button id="nav-close" class="p-2 rounded-lg focus:outline-none" aria-label="Cerrar menú">
+<!-- Overlay móvil fullscreen -->
+<div id="nav-menu"
+     class="fixed inset-0 z-[60] hidden opacity-0 transition-opacity duration-300 ease-out
+            bg-ternarycolor text-primarycolor lg:hidden"
+     aria-hidden="true">
+  <!-- Header del overlay -->
+  <div class="flex items-center justify-between px-5 py-4 border-b border-white/10">
+    <span class="font-bold">valnhe</span>
+    <button id="nav-close" class="p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-primarycolor/50"
+            aria-label="Cerrar menú">
       <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
       </svg>
@@ -38,56 +35,127 @@
   </div>
 
   <!-- Links centrados -->
-  <div class="h-[calc(100vh-56px)] flex flex-col items-center justify-center gap-10">
-    <a href="/projects"    class="nav-link text-2xl">Proyectos</a>
-   <!-- <a href="/about-me"    class="nav-link text-2xl">Sobre mí</a>-->
-    <a href="/#email-zone" class="nav-link text-2xl">Contacto</a>
-  </div>
+  <nav class="h-[calc(100vh-56px)] flex flex-col items-center justify-center gap-10 text-2xl">
+    <a href="/"          class="font-bold">Inicio</a>
+    <a href="/projects"  class="font-bold">Proyectos</a>
+    <a href="/#email-zone" class="font-bold">Contacto</a>
+  </nav>
 </div>
 
-<script type="module">
-  const btn = document.getElementById('nav-toggle');
-  const menu = document.getElementById('nav-menu');
-  const closeBtn = document.getElementById('nav-close');
-  const iconOpen = document.getElementById('icon-open');
-  const iconClose = document.getElementById('icon-close');
+<!-- NAV PC -->
+<nav class="[grid-area:nav] bg-ternarycolor text-primarycolor rounded-3xl shadow-lg px-4 md:px-8 py-4 hidden lg:!flex flex-row justify-between items-center">
+<a href="/" class="font-bold">valnhe</a>
+<ul class="flex gap-6">
+  <li>
+    <a href="/projects"
+       class="relative font-bold text-primarycolor transition-colors duration-300 ease-in-out
+              after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-0
+              after:bg-primarycolor after:transition-all after:duration-300 hover:after:w-full">
+      Proyectos
+    </a>
+  </li>
+  <li>
+    <a href="/contact"
+       class="relative font-bold text-primarycolor transition-colors duration-300 ease-in-out
+              after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-0
+              after:bg-primarycolor after:transition-all after:duration-300 hover:after:w-full">
+      Contacto
+    </a>
+  </li>
+</ul>
+</nav>
 
-  const lockScroll = (lock) => {
-    document.documentElement.classList.toggle('overflow-hidden', lock);
-    document.body.classList.toggle('overflow-hidden', lock);
-  };
+<script is:inline>
+  (() => {
+    // Reutilizamos un AbortController para limpiar listeners entre páginas
+    let ctrl = window.__navCtrl;
 
-  function setExpanded(expanded) {
-    btn?.setAttribute('aria-expanded', String(expanded));
-    menu?.setAttribute('aria-hidden', String(!expanded));
-    iconOpen?.classList.toggle('hidden', expanded);
-    iconClose?.classList.toggle('hidden', !expanded);
+    function setupNav() {
+      // Si había listeners previos, los abortamos (se eliminan todos)
+      ctrl?.abort();
+      ctrl = new AbortController();
+      window.__navCtrl = ctrl;
 
-    if (expanded) {
-      menu?.classList.remove('hidden');
-      requestAnimationFrame(() => menu?.classList.remove('opacity-0'));
-    } else {
-      menu?.classList.add('opacity-0');
-      setTimeout(() => menu?.classList.add('hidden'), 250);
+      const btn = document.getElementById('nav-toggle');
+      const menu = document.getElementById('nav-menu');
+      const closeBtn = document.getElementById('nav-close');
+      const iconOpen = document.getElementById('icon-open');
+      const iconClose = document.getElementById('icon-close');
+      if (!btn || !menu || !iconOpen || !iconClose) return;
+
+      let isOpen = false;
+
+      const lockScroll = (lock) => {
+        document.documentElement.classList.toggle('overflow-hidden', lock);
+        document.body.classList.toggle('overflow-hidden', lock);
+      };
+
+      function openMenu() {
+        if (isOpen) return;
+        isOpen = true;
+        btn.setAttribute('aria-expanded', 'true');
+        menu.setAttribute('aria-hidden', 'false');
+        iconOpen.classList.add('hidden');
+        iconClose.classList.remove('hidden');
+        menu.classList.remove('hidden');
+        // Forzar reflow para que la transición de opacity funcione
+        void menu.offsetWidth;
+        menu.classList.remove('opacity-0');
+        lockScroll(true);
+      }
+
+      function closeMenu() {
+        if (!isOpen) return;
+        isOpen = false;
+        btn.setAttribute('aria-expanded', 'false');
+        menu.setAttribute('aria-hidden', 'true');
+        iconOpen.classList.remove('hidden');
+        iconClose.classList.add('hidden');
+        // fade-out y ocultar cuando termine
+        const onEnd = (e) => {
+          if (e.target !== menu || e.propertyName !== 'opacity') return;
+          menu.classList.add('hidden');
+          menu.removeEventListener('transitionend', onEnd);
+        };
+        menu.addEventListener('transitionend', onEnd, { signal: ctrl.signal });
+        menu.classList.add('opacity-0');
+        lockScroll(false);
+      }
+
+      // Listeners (todos con ctrl.signal para poder abortarlos)
+      btn.addEventListener('click', () => (isOpen ? closeMenu() : openMenu()), { signal: ctrl.signal });
+      closeBtn?.addEventListener('click', closeMenu, { signal: ctrl.signal });
+
+      // Cerrar al clickear un link del overlay
+      menu.querySelectorAll('a').forEach(a => {
+        a.addEventListener('click', closeMenu, { signal: ctrl.signal });
+      });
+
+      // Cerrar con Escape
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closeMenu();
+      }, { signal: ctrl.signal });
+
+      // Cerrar al hacer click fuera
+      document.addEventListener('click', (e) => {
+        if (!isOpen) return;
+        const path = e.composedPath();
+        if (!path.includes(menu) && !path.includes(btn)) closeMenu();
+      }, { signal: ctrl.signal });
+
+      // Si pasa a desktop (≥1024px), cerrar overlay
+      const mql = window.matchMedia('(min-width: 1024px)');
+      const onBp = (e) => { if (e.matches) closeMenu(); };
+      mql.addEventListener('change', onBp, { signal: ctrl.signal });
     }
-    lockScroll(expanded);
-  }
 
-  btn?.addEventListener('click', () => {
-    const expanded = btn.getAttribute('aria-expanded') === 'true';
-    setExpanded(!expanded);
-  });
+    // 🔁 Re-inicializa al cargar página y tras swaps de Astro
+    document.addEventListener('astro:page-load', setupNav);
+    document.addEventListener('DOMContentLoaded', setupNav);
 
-  closeBtn?.addEventListener('click', () => setExpanded(false));
-
-  menu?.querySelectorAll('a').forEach(a => a.addEventListener('click', () => setExpanded(false)));
-
-  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') setExpanded(false); });
-
-  document.addEventListener('click', (e) => {
-    const path = e.composedPath();
-    if (btn && menu && !menu.classList.contains('hidden')) {
-      if (!path.includes(menu) && !path.includes(btn)) setExpanded(false);
-    }
-  });
+    // Limpia justo antes de hacer el swap (por si tu layout es persistente)
+    document.addEventListener('astro:before-swap', () => {
+      ctrl?.abort();
+    });
+  })();
 </script>

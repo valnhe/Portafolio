@@ -1,7 +1,12 @@
 ---
-import Icon from './Icon.astro';
-import perfil from '../data/perfil.json';
-import { fetchContributions, heatmapHtml, totalLabel, usernameFrom } from '../lib/github';
+import Icon from "./Icon.astro";
+import perfil from "../data/perfil.json";
+import {
+	fetchContributions,
+	heatmapHtml,
+	totalLabel,
+	usernameFrom,
+} from "../lib/github";
 
 // Se consulta al compilar (para que la página nunca salga vacía)
 // y el navegador vuelve a pedir los datos al abrirla, así queda al día.
@@ -39,10 +44,6 @@ const contrib = await fetchContributions(githubUser);
 			<Icon type="download" />
 			Descargar CV
 		</a>
-		<span class="available">
-			<span class="status-dot"></span>
-			{perfil.disponible}
-		</span>
 	</div>
 
 	<section class="calendar-card glass-panel">
@@ -52,7 +53,9 @@ const contrib = await fetchContributions(githubUser);
 			<span data-calendar-label></span>
 		</div>
 		<div class="weekday-row">
-			{['L', 'M', 'X', 'J', 'V', 'S', 'D'].map((d) => <span>{d}</span>)}
+			{["L", "M", "X", "J", "V", "S", "D"].map((d) => (
+				<span>{d}</span>
+			))}
 		</div>
 		<div
 			class="calendar-grid"
@@ -62,7 +65,8 @@ const contrib = await fetchContributions(githubUser);
 		></div>
 		<p class="calendar-note" aria-live="polite">
 			<span class="tiny-star">✦</span>
-			<span data-cal-note-label>hoy</span>: <span data-cal-note>{perfil.calendario.porDefecto}</span>
+			<span data-cal-note-label>hoy</span>:{" "}
+			<span data-cal-note>{perfil.calendario.porDefecto}</span>
 		</p>
 	</section>
 
@@ -70,8 +74,13 @@ const contrib = await fetchContributions(githubUser);
 		<span class="paper" aria-hidden="true"></span>
 		<div class="panel-heading">
 			<span>actividad en github</span>
-			<a href={perfil.links.github} target="_blank" rel="noreferrer" data-gh-total>
-				{contrib ? totalLabel(contrib.total) : 'ver perfil ↗'}
+			<a
+				href={perfil.links.github}
+				target="_blank"
+				rel="noreferrer"
+				data-gh-total
+			>
+				{contrib ? totalLabel(contrib.total) : "ver perfil ↗"}
 			</a>
 		</div>
 		<div
@@ -80,22 +89,24 @@ const contrib = await fetchContributions(githubUser);
 			aria-label="Mapa de contribuciones en GitHub del último año"
 			data-gh-heatmap
 			data-gh-user={githubUser}
-			set:html={contrib ? heatmapHtml(contrib.days) : ''}
+			set:html={contrib ? heatmapHtml(contrib.days) : ""}
 		/>
 		<div class="heatmap-legend">
 			<span>menos</span>
-			{[0, 1, 2, 3, 4].map((level) => <i class={`level-${level}`}></i>)}
+			{[0, 1, 2, 3, 4].map((level) => (
+				<i class={`level-${level}`}></i>
+			))}
 			<span>más</span>
 		</div>
 	</section>
 </aside>
 
 <script>
-	import { fetchContributions, heatmapHtml, totalLabel } from '../lib/github';
+	import { fetchContributions, heatmapHtml, totalLabel } from "../lib/github";
 
 	// Actividad de GitHub: refresca con los datos más recientes al abrir la página
-	const heatmap = document.querySelector<HTMLElement>('[data-gh-heatmap]');
-	const total = document.querySelector('[data-gh-total]');
+	const heatmap = document.querySelector<HTMLElement>("[data-gh-heatmap]");
+	const total = document.querySelector("[data-gh-total]");
 	if (heatmap?.dataset.ghUser) {
 		fetchContributions(heatmap.dataset.ghUser).then((data) => {
 			if (!data) return;
@@ -105,20 +116,35 @@ const contrib = await fetchContributions(githubUser);
 	}
 
 	// Calendario: mes actual (hora de Chile) + notas diarias guardadas desde /hoy
-	const MESES = ['ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic'];
-	const label = document.querySelector('[data-calendar-label]');
-	const grid = document.querySelector<HTMLElement>('[data-calendar-grid]');
-	const noteLabel = document.querySelector('[data-cal-note-label]');
-	const noteText = document.querySelector('[data-cal-note]');
+	const MESES = [
+		"ene",
+		"feb",
+		"mar",
+		"abr",
+		"may",
+		"jun",
+		"jul",
+		"ago",
+		"sep",
+		"oct",
+		"nov",
+		"dic",
+	];
+	const label = document.querySelector("[data-calendar-label]");
+	const grid = document.querySelector<HTMLElement>("[data-calendar-grid]");
+	const noteLabel = document.querySelector("[data-cal-note-label]");
+	const noteText = document.querySelector("[data-cal-note]");
 
 	if (label && grid && noteLabel && noteText) {
-		const tz = grid.dataset.tz || 'America/Santiago';
-		const porDefecto = grid.dataset.default || '';
+		const tz = grid.dataset.tz || "America/Santiago";
+		const porDefecto = grid.dataset.default || "";
 		// "Hoy" según la zona horaria configurada, en formato YYYY-MM-DD
-		const hoy = new Intl.DateTimeFormat('en-CA', { timeZone: tz }).format(new Date());
-		const [y, m, d] = hoy.split('-').map(Number);
+		const hoy = new Intl.DateTimeFormat("en-CA", { timeZone: tz }).format(
+			new Date(),
+		);
+		const [y, m, d] = hoy.split("-").map(Number);
 		const mesKey = hoy.slice(0, 7);
-		label.textContent = `${String(m).padStart(2, '0')} / ${y}`;
+		label.textContent = `${String(m).padStart(2, "0")} / ${y}`;
 
 		const offset = (new Date(y, m - 1, 1).getDay() + 6) % 7; // lunes = 0
 		const daysInMonth = new Date(y, m, 0).getDate();
@@ -127,34 +153,45 @@ const contrib = await fetchContributions(githubUser);
 		const dayEls = new Map<string, HTMLElement>();
 
 		for (let i = 0; i < cells; i++) {
-			const span = document.createElement('span');
+			const span = document.createElement("span");
 			const day = i - offset + 1;
 			if (day < 1) {
 				span.textContent = String(daysPrev + day);
-				span.className = 'muted';
+				span.className = "muted";
 			} else if (day > daysInMonth) {
 				span.textContent = String(day - daysInMonth);
-				span.className = 'muted';
+				span.className = "muted";
 			} else {
 				span.textContent = String(day);
-				if (day === d) span.classList.add('today');
-				dayEls.set(`${mesKey}-${String(day).padStart(2, '0')}`, span);
+				if (day === d) span.classList.add("today");
+				dayEls.set(`${mesKey}-${String(day).padStart(2, "0")}`, span);
 			}
 			grid.appendChild(span);
 		}
 
 		let notas: Record<string, string> = {};
-		const mostrarHoy = () => {
-			noteLabel.textContent = 'hoy';
-			noteText.textContent = notas[hoy] || porDefecto;
+		// Cambia la nota del día con una view transition (si el navegador la soporta)
+		const quiet = matchMedia("(prefers-reduced-motion: reduce)");
+		const ponerNota = (etiqueta: string, texto: string) => {
+			if (noteLabel.textContent === etiqueta && noteText.textContent === texto) return;
+			const update = () => {
+				noteLabel.textContent = etiqueta;
+				noteText.textContent = texto;
+			};
+			if (!document.startViewTransition || quiet.matches) return update();
+			const html = document.documentElement;
+			html.dataset.vt = "nota";
+			document.startViewTransition(update).finished.finally(() => {
+				if (html.dataset.vt === "nota") delete html.dataset.vt;
+			});
 		};
+		const mostrarHoy = () => ponerNota("hoy", notas[hoy] || porDefecto);
 		const mostrar = (fecha: string) => {
 			const dia = Number(fecha.slice(8));
-			noteLabel.textContent = fecha === hoy ? 'hoy' : `${dia} ${MESES[m - 1]}`;
-			noteText.textContent = notas[fecha];
+			ponerNota(fecha === hoy ? "hoy" : `${dia} ${MESES[m - 1]}`, notas[fecha]);
 		};
 
-		fetch(`/api/hoy?mes=${mesKey}`, { cache: 'no-store' })
+		fetch(`/api/hoy?mes=${mesKey}`, { cache: "no-store" })
 			.then((r) => (r.ok ? r.json() : null))
 			.then((data) => {
 				if (!data?.notas) return;
@@ -163,16 +200,19 @@ const contrib = await fetchContributions(githubUser);
 				for (const [fecha, texto] of Object.entries(notas)) {
 					const el = dayEls.get(fecha);
 					if (!el || !texto) continue;
-					el.classList.add('has-note');
+					el.classList.add("has-note");
 					el.tabIndex = 0;
 					el.title = texto;
-					el.setAttribute('role', 'button');
-					el.setAttribute('aria-label', `${Number(fecha.slice(8))} ${MESES[m - 1]}: ${texto}`);
-					el.addEventListener('mouseenter', () => mostrar(fecha));
-					el.addEventListener('focus', () => mostrar(fecha));
-					el.addEventListener('click', () => mostrar(fecha));
-					el.addEventListener('mouseleave', mostrarHoy);
-					el.addEventListener('blur', mostrarHoy);
+					el.setAttribute("role", "button");
+					el.setAttribute(
+						"aria-label",
+						`${Number(fecha.slice(8))} ${MESES[m - 1]}: ${texto}`,
+					);
+					el.addEventListener("mouseenter", () => mostrar(fecha));
+					el.addEventListener("focus", () => mostrar(fecha));
+					el.addEventListener("click", () => mostrar(fecha));
+					el.addEventListener("mouseleave", mostrarHoy);
+					el.addEventListener("blur", mostrarHoy);
 				}
 			})
 			.catch(() => {

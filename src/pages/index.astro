@@ -55,6 +55,17 @@ import perfil from '../data/perfil.json';
 <script>
 	const $ = <T extends Element = HTMLElement>(s: string) => document.querySelector<T>(s)!;
 
+	// Cambio con view transition cuando el navegador lo soporta (y sin animar si se pidió menos movimiento)
+	const quiet = matchMedia('(prefers-reduced-motion: reduce)');
+	const withTransition = (update: () => void, tipo = 'pestanas') => {
+		if (!document.startViewTransition || quiet.matches) return update();
+		const html = document.documentElement;
+		html.dataset.vt = tipo;
+		document.startViewTransition(update).finished.finally(() => {
+			if (html.dataset.vt === tipo) delete html.dataset.vt;
+		});
+	};
+
 	// Pestañas
 	const tabs = document.querySelectorAll<HTMLButtonElement>('.tabs [role="tab"]');
 	function activate(tab: HTMLButtonElement) {
@@ -70,14 +81,15 @@ import perfil from '../data/perfil.json';
 	if (fromHash) activate(fromHash);
 	tabs.forEach((tab, i) => {
 		tab.addEventListener('click', () => {
-			activate(tab);
+			if (tab.classList.contains('active')) return;
+			withTransition(() => activate(tab));
 			history.replaceState(null, '', `#${tab.dataset.tab}`);
 		});
 		tab.addEventListener('keydown', (e) => {
 			const dir = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
 			if (!dir) return;
 			const next = tabs[(i + dir + tabs.length) % tabs.length];
-			activate(next);
+			withTransition(() => activate(next));
 			next.focus();
 		});
 	});
@@ -94,12 +106,14 @@ import perfil from '../data/perfil.json';
 		});
 	}
 	subtabs.forEach((tab, i) => {
-		tab.addEventListener('click', () => activateSub(tab));
+		tab.addEventListener('click', () => {
+			if (!tab.classList.contains('active')) withTransition(() => activateSub(tab));
+		});
 		tab.addEventListener('keydown', (e) => {
 			const dir = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
 			if (!dir) return;
 			const next = subtabs[(i + dir + subtabs.length) % subtabs.length];
-			activateSub(next);
+			withTransition(() => activateSub(next));
 			next.focus();
 		});
 	});
@@ -118,15 +132,20 @@ import perfil from '../data/perfil.json';
 
 	const shell = $('[data-shell]');
 	const easterEgg = $('[data-easter-egg]');
+	// La ventana se "minimiza" convirtiéndose en la tarjeta del easter egg, y vuelve al revés
 	$('[data-minimize]').addEventListener('click', () => {
-		shell.hidden = true;
-		easterEgg.hidden = false;
-		window.scrollTo(0, 0);
+		withTransition(() => {
+			shell.hidden = true;
+			easterEgg.hidden = false;
+			window.scrollTo(0, 0);
+		}, 'ventana');
 	});
 	$('[data-easter-back]').addEventListener('click', (e) => {
 		e.preventDefault();
-		easterEgg.hidden = true;
-		shell.hidden = false;
+		withTransition(() => {
+			easterEgg.hidden = true;
+			shell.hidden = false;
+		}, 'ventana');
 	});
 
 	const closeBtn = $('[data-close]');

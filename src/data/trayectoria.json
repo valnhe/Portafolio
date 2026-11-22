@@ -61,10 +61,6 @@
         "cargo": "Ingeniería Civil Informática",
         "lugar": "Universidad Técnica Federico Santa María",
         "descripcion": "Titulada en agosto de 2026.",
-        "chips": [
-          "Ingeniería de Software",
-          "UX"
-        ],
         "destacado": true,
         "insignia": "distinción máxima"
       },

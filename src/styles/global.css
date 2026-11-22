@@ -150,19 +150,6 @@
   transform: rotate(-2deg);
 }
 
-.cat-mark::before,
-.cat-mark::after {
-  position: absolute;
-  top: 7px;
-  width: 6px;
-  height: 6px;
-  border-top: 1px solid var(--lilac-dark);
-  content: '';
-  transform: rotate(45deg);
-}
-
-.cat-mark::before { margin-left: -15px; }
-.cat-mark::after { margin-left: 15px; }
 
 .online-label {
   padding: 3px 7px;
@@ -256,7 +243,7 @@
 .glass-panel > .paper {
   border: 1px solid rgba(99, 90, 108, 0.22);
   background:
-    linear-gradient(125deg, rgba(255, 255, 255, 0.46), rgba(248, 245, 249, 0.25)),
+    linear-gradient(125deg, rgba(255, 255, 255, 0.34), rgba(248, 245, 249, 0.2)),
     url("data:image/svg+xml,%3Csvg viewBox='0 0 140 140' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='paper'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.7' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23paper)' opacity='.055'/%3E%3C/svg%3E");
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.72), 0 10px 28px rgba(68, 60, 75, 0.06);
   backdrop-filter: blur(13px);
@@ -405,8 +392,9 @@ h1 {
 }
 
 .contact-box > .paper {
-  border: 1px solid rgba(93, 84, 101, 0.17);
-  background: rgba(247, 245, 248, 0.34);
+  border: 1px solid rgba(99, 90, 108, 0.22);
+  background: linear-gradient(125deg, rgba(255, 255, 255, 0.34), rgba(248, 245, 249, 0.2));
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.72), 0 10px 28px rgba(68, 60, 75, 0.06);
 }
 
 .contact-box > p {
@@ -1758,21 +1746,39 @@ h1 {
     transition: none;
   }
 
-  .site-shell::before { backdrop-filter: none; }
+  /* El fondo va en una capa fija del tamaño de la pantalla: si se estira a lo alto
+     de toda la página, los colores quedan repartidos y aparecen de golpe al bajar.
+     Usa una versión ya desenfocada de la imagen, porque aquí no hay desenfoque en vivo. */
+  .site-shell { background: rgb(244, 238, 243); }
+
+  .site-shell::before {
+    position: fixed;
+    backdrop-filter: none;
+    background:
+      linear-gradient(rgba(250, 246, 248, 0.25), rgba(250, 246, 248, 0.25)),
+      radial-gradient(circle at 8% 16%, rgba(245, 143, 151, 0.48), transparent 24%),
+      radial-gradient(circle at 88% 12%, rgba(80, 157, 211, 0.45), transparent 25%),
+      radial-gradient(circle at 17% 87%, rgba(247, 199, 80, 0.42), transparent 27%),
+      radial-gradient(circle at 83% 82%, rgba(157, 119, 193, 0.48), transparent 28%),
+      linear-gradient(135deg, rgba(248, 236, 239, 0.55), rgba(232, 239, 246, 0.52)),
+      url('/assets/cat-clouds-blur.webp') center / cover;
+  }
 
   .desktop-window {
     backdrop-filter: none;
     background:
-      linear-gradient(rgba(248, 245, 249, 0.82), rgba(246, 243, 248, 0.78));
+      linear-gradient(rgba(247, 243, 247, 0.5), rgba(245, 242, 247, 0.42));
     transition: none;
   }
 
-  .glass-panel > .paper {
+  /* Sin el desenfoque de la ventana el fondo se ve más apagado: un poco más de blanco lo compensa */
+  .glass-panel > .paper,
+  .contact-box > .paper {
     backdrop-filter: none;
-    background: linear-gradient(125deg, rgba(255, 255, 255, 0.72), rgba(250, 247, 250, 0.6));
+    background: rgba(253, 251, 253, 0.38);
   }
 
-  .browser-panel > .paper { background: linear-gradient(125deg, rgba(255, 255, 255, 0.72), rgba(250, 247, 250, 0.6)); }
+  .browser-panel > .paper { background: rgba(253, 251, 253, 0.38); }
 
   /* Maximizar/restaurar: cambio instantáneo con un "pop" que solo usa transform */
   .desktop-window.pop { animation: window-pop 0.28s ease-out; }
@@ -1995,3 +2001,131 @@ h1 {
 /* Easter egg al minimizar */
 .easter-egg-card { z-index: 1; text-align: center; }
 .easter-egg-card h1 { margin-bottom: 18px; font-size: 30px; }
+
+/* Mismo brillo lila de la intro en la parte de abajo del calendario y la actividad */
+.calendar-card::after,
+.activity-card::after {
+  position: absolute;
+  right: 19%;
+  bottom: 0;
+  width: 250px;
+  max-width: 85%;
+  height: 180px;
+  pointer-events: none;
+  background: radial-gradient(circle at 50% 100%, rgba(193, 178, 218, 0.25), transparent 65%);
+  content: '';
+}
+
+/* Dentro de la ventana las tarjetas no se desenfocan por su cuenta (la ventana ya lo hace):
+   así se ven igual de transparentes en escritorio y en móvil */
+.desktop-window .glass-panel > .paper { backdrop-filter: none; }
+
+/* Pestaña activa: sin fondo, con subrayado y punto del color de cada pestaña */
+.tabs button[data-tab='trayectoria'] { --tab-color: #a58fcb; }
+.tabs button[data-tab='herramientas'] { --tab-color: #e88aa3; }
+.tabs button[data-tab='proyectos'] { --tab-color: #7fb3d8; }
+
+.tabs button.active::before { inset: 0; background: transparent; }
+
+/* Subrayado tipo marcador bajo el texto, como en la intro */
+.tabs button.active > span:first-child { position: relative; }
+
+/* Subrayado curvo, como trazo a mano, del color de la pestaña */
+.tabs button.active > span:first-child::after {
+  position: absolute;
+  z-index: -1;
+  right: -3px;
+  bottom: -5px;
+  left: -3px;
+  height: 7px;
+  content: '';
+  opacity: 0.75;
+  background: var(--tab-color);
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 10' preserveAspectRatio='none'%3E%3Cpath d='M2 6.5 Q 50 1 98 5.5' fill='none' stroke='black' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E") center / 100% 100% no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 10' preserveAspectRatio='none'%3E%3Cpath d='M2 6.5 Q 50 1 98 5.5' fill='none' stroke='black' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E") center / 100% 100% no-repeat;
+}
+
+/* La línea bajo las pestañas se corta en la pestaña activa (ya no tiene fondo que la tape) */
+.tabs {
+  gap: 0;
+  padding: 0;
+  border-bottom: 0;
+}
+
+.tabs::before,
+.tabs::after {
+  align-self: stretch;
+  border-bottom: 1px solid var(--line);
+  content: '';
+}
+
+.tabs::before { flex: 0 0 6px; }
+.tabs::after { flex: 1; }
+
+.tabs button:not(.active) { box-shadow: inset 0 -1px var(--line); }
+.tabs button + button { margin-left: 0; }
+
+.tabs button .tab-dot { background: var(--tab-color); }
+
+/* ---- View transitions al cambiar de pestaña y de laboral / académico ----
+   La pestaña activa y el chip activo se deslizan a su nueva posición;
+   el contenido se desvanece y entra con un pequeño desplazamiento. */
+/* Los nombres solo existen durante su propia transición (data-vt en <html>),
+   así cambiar de pestaña no anima el calendario y viceversa */
+[data-vt='pestanas'] .tabs button.active { view-transition-name: tab-activa; }
+[data-vt='pestanas'] .subtabs button.active { view-transition-name: chip-activo; }
+[data-vt='pestanas'] .tab-content { view-transition-name: tab-contenido; }
+
+::view-transition-group(*) {
+  animation-duration: 0.32s;
+  animation-timing-function: cubic-bezier(0.3, 0.7, 0.2, 1);
+}
+
+::view-transition-old(root),
+::view-transition-new(root) { animation-duration: 0.2s; }
+
+::view-transition-old(tab-contenido) { animation: vt-salir 0.16s ease both; }
+::view-transition-new(tab-contenido) { animation: vt-entrar 0.3s 0.06s cubic-bezier(0.3, 0.7, 0.2, 1) both; }
+
+/* El contenido cambia de alto: se recorta en vez de estirarse */
+::view-transition-old(tab-contenido),
+::view-transition-new(tab-contenido) {
+  height: 100%;
+  object-fit: none;
+  object-position: top;
+}
+
+@keyframes vt-salir {
+  to { opacity: 0; transform: translateY(-4px); }
+}
+
+@keyframes vt-entrar {
+  from { opacity: 0; transform: translateY(8px); }
+}
+
+/* Nota del calendario: la frase sale y entra al cambiar de día */
+[data-vt='nota'] .calendar-note { view-transition-name: nota-dia; }
+::view-transition-old(nota-dia) { animation: vt-salir 0.14s ease both; }
+::view-transition-new(nota-dia) { animation: vt-entrar 0.26s 0.04s cubic-bezier(0.3, 0.7, 0.2, 1) both; }
+
+/* Minimizar: la ventana se encoge hasta la tarjeta del easter egg (y vuelve al revés) */
+[data-vt='ventana'] .desktop-window,
+[data-vt='ventana'] .easter-egg-card { view-transition-name: ventana; }
+
+::view-transition-group(ventana) {
+  animation-duration: 0.45s;
+  animation-timing-function: cubic-bezier(0.3, 0.7, 0.2, 1);
+}
+
+::view-transition-old(ventana),
+::view-transition-new(ventana) {
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+}
+
+::view-transition-old(ventana) { animation: vt-salir-suave 0.25s ease both; }
+::view-transition-new(ventana) { animation: vt-entrar-suave 0.35s 0.1s ease both; }
+
+@keyframes vt-salir-suave { to { opacity: 0; } }
+@keyframes vt-entrar-suave { from { opacity: 0; } }

@@ -1,0 +1,35 @@
+{
+  "nombre": "Valentina Castillo",
+  "usuario": "valnhe",
+  "saludo": "hola, mundo",
+  "titulo": "Soy Valentina Castillo.",
+  "rol": "Ingeniera Civil Informática • UTFSM",
+  "intro": "Ingeniera Civil Informática con experiencia en desarrollo **Full Stack**, participando en el ciclo completo de funcionalidades: desde el levantamiento de requisitos hasta su puesta en producción. Me motiva __diseñar y desarrollar__ software de calidad, mantenible y orientado a las personas que lo usan.",
+  "disponible": "disponible para colaborar",
+  "links": {
+    "github": "https://github.com/valnhe",
+    "linkedin": "https://www.linkedin.com/in/valentina-castillo-valdes/",
+    "email": "vpazcastle@gmail.com",
+    "cv": "/documents/CV_ValentinaCastillo.pdf"
+  },
+  "cancion": {
+    "titulo": "Borderline",
+    "artista": "Tame Impala",
+    "actual": "2:43",
+    "duracion": "4:08"
+  },
+  "estado": {
+    "izquierda": "todo funciona (más o menos)",
+    "centro": "hecho con curiosidad y cachantún con gas",
+    "repositorio": "https://github.com/valnhe/portfolio"
+  },
+  "agenda": {
+    "titulo": "archivo secreto de valnhe",
+    "nota": "seguir creando aunque la ventana esté minimizada."
+  },
+  "seo": {
+    "titulo": "valnhe | Valentina Castillo — Ingeniera Civil Informática",
+    "descripcion": "Portafolio de Valentina Castillo, Ingeniera Civil Informática y desarrolladora Full Stack.",
+    "url": "https://valnhe.netlify.app"
+  }
+}

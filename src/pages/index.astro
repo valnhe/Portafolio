@@ -1,163 +1,164 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import Nav from '../components/nav.astro';
-import AboutMe from '../components/About.astro';
-import Picture from '../components/index-page/PictureCard.astro';
-import Curriculum from '../components/index-page/CurriculumCard.astro';
-import Toggle from '../components/Toggle.astro'
-import Tecno from "../components/index-page/TecnoCard.astro";
-import Email from '../components/index-page/EmailCard.astro';
-import ProjectCard from '../components/index-page/ProjectCard.astro';
-import TagSmall from '../components/projects-page/TagSmallProject.astro';
-import Links from '../components/index-page/Links.astro';
-
-import LinksCard from '../components/index-page/LinksCard.astro';
-
-import staticGit from "../images/githubIcon.webp"
-import lightLinkedin from "../images/linkedin.webp"
-import darkLinkedin from "../images/linkedindark.webp"
-import gifComputer from "../images/computer1.gif";
+import Intro from '../components/Intro.astro';
+import TabsPanel from '../components/TabsPanel.astro';
+import Sidebar from '../components/Sidebar.astro';
+import Notebook from '../components/Notebook.astro';
+import Player from '../components/Player.astro';
+import perfil from '../data/perfil.json';
 ---
 
-<Layout title="valnhe | Porfolio - Estudiante de Ing.Informática con interés en el Desarrollo Web">
-	<main id= "app">
-		<AboutMe>
-			<h2 class="text-lg xl:text-2xl text-white">Hola 👋,</h2>
-			<h1 class="text-white font-base text-2xl xl:text-4xl">Soy <span class="font-bold">Valentina</span> Castillo<h1/>
-			<p class="text-white text-md font-medium mt-2">Estudiante de Ingeniería Informática</p>
-			<p class="text-white text-md mt-5">
-				Actualmente curso mi último año, con especial interés en la
-				<span class="font-semibold text-secondarycolor">Ingeniería de Software</span>. 
-				Me motiva <span class="font-semibold text-secondarycolor">diseñar y desarrollar soluciones tecnológicas</span> 
-				que combinen <span class="font-semibold text-secondarycolor">calidad</span>, 
-				<span class="font-semibold text-secondarycolor">eficiencia</span> y 
-				<span class="font-semibold text-secondarycolor">usabilidad</span>, 
-				aplicando <span class="font-semibold">metodologías modernas</span> 
-				y <span class="font-semibold">buenas prácticas de la industria</span>.
-				</p>
-			<!--<a href="/projects" class="self-end flex items-center gap-1 group text-secondarycolor hover:text-ternarycolor transition mb-4">
-				<span class="text-bolder">Conóceme un poquito más aquí</span>
-				<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-					stroke="currentColor"
-					class="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1">
-					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-				</svg>
-			</a>-->
-			<Links/>
-			<a href="/documents/CV_ValentinaCastillo.pdf" download
-				class="inline-flex items-center gap-2 px-3 py-2 rounded-lg border border-ternarycolor
-						text-ternarycolor hover:bg-pink-300/10 transition mt-4 w-fit mx-auto"
-				aria-label="Descargar Curriculum en PDF">
-				<svg class="w-4 h-4" viewBox="0 0 24 24" fill="none"
-					stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-				<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-				<path d="M7 10l5 5 5-5"/>
-				<path d="M12 15V3"/>
-				</svg>
-				Descargar CV
-			</a>
-		</AboutMe>
+<Layout>
+	<main class="site-shell" data-shell>
+		<div class="ambient ambient-one"></div>
+		<div class="ambient ambient-two"></div>
 
-		<!--<Picture/>-->
-		<Toggle/>
-		<Tecno/>
+		<section class="desktop-window" data-window>
+			<header class="titlebar">
+				<div class="brand">
+					<div class="cat-mark" aria-hidden="true">
+						<span>·</span><span>ᴗ</span><span>·</span>
+					</div>
+					<span>{perfil.usuario}</span>
+					<span class="online-label">online</span>
+				</div>
+				<div class="window-actions" aria-label="Controles de ventana">
+					<button aria-label="Minimizar" data-minimize><span class="minimize-symbol"></span></button>
+					<button aria-label="Maximizar" data-maximize><span class="maximize-symbol"></span></button>
+					<button aria-label="Cerrar" class="close-button" data-close><span></span></button>
+				</div>
+			</header>
 
-		<!--
-			<LinksCard
-			link="/projects"
-			alt="Proyectos"
-			img={gifComputer.src}
-			class="[grid-area:project]"
-			classImage="blur-[1px] object-cover"
-			>
-			<h3 class="mt-[153px] text-xl font-semibold">Proyectos</h3>
-			<p>Ve los proyectos que he realizado 💗</p>
-			</LinksCard>
-			-->
-
-		<!-- Proyectos Pequeños -->
-        <section class="[grid-area:project] grid grid-cols-projectos gap-3 md:block self-center rounded-3xl p-8 bg-primarycolor h-full">
-			<div class="mb-4 text-white flex flex-col gap-0.5">
-				<h3 class="text-xl font-semibold">Proyectos</h3>
-				<p>Ve los proyectos que he realizado 💗</p>
-				<a href="/projects" class="self-end flex items-center gap-1 group text-ternarycolor hover:secondarycolor transition">
-					Ver más
-					<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-						stroke="currentColor"
-						class="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1">
-					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-					</svg>
-				</a>
+			<div class="window-body">
+				<Intro />
+				<div class="content-grid">
+					<TabsPanel />
+					<Sidebar />
+				</div>
 			</div>
-	
-            <!-- Proyecto 1 -->
-            <ProjectCard
-                name="TeacHear 📚",
-                git="https://teachear.feriadesoftware.cl",
-                >
 
-				<p class="mb-2 text-pretty text-sm" slot="text">Aplicación web que utiliza IA para apoyar la evaluación del dominio lector en estudiantes de educación básica. <span class="font-bold">33ª Feria de Software de la Universidad Técnica Federico Santa María.</span></p>
-
-                <ul class="flex justify-end gap-2 flex-wrap" slot="ul">
-                    <TagSmall label="nextjs"/>
-                    <TagSmall label="tailwind"/>
-                    <TagSmall label="typescript"/>
-                </ul>
-            </ProjectCard>
-
-			<!-- Proyecto 2 -->
-			<ProjectCard
-                name="Translate App 🌎",
-                git="https://translate-app-valnhe.netlify.app",
-                >
-
-				<p class="mb-2 text-pretty text-sm" slot="text">La página utiliza la API de My Memory para <span class="font-bold">traducir el texto ingresado al idioma seleccionado</span>. ¡También permite copiar y escuchar el texto ingresado y traducido!</p>
-
-                <ul class="flex justify-end gap-2 flex-wrap" slot="ul">
-                    <TagSmall label="react"/>
-                    <TagSmall label="tailwind"/>
-                    <TagSmall label="vitejs"/>
-                </ul>
-                
-            </ProjectCard>
-
-            <!-- Proyecto 2 -->
-            <ProjectCard
-                name="GitHub Profile Visualizer 🖥️",
-                git="https://github-profile-valnhe.netlify.app",
-                >
-
-				<p class="mb-2 text-pretty text-sm" slot="text">La página utiliza la API de GitHub para <span class="font-bold">visualizar el perfil del usuario buscado</span>, mostrando información detallada como el número de seguidores, la cantidad de personas a las que sigue y su ubicación.</p>
-            
-                <ul class="flex justify-end gap-2 flex-wrap" slot="ul">
-                    <TagSmall label="react"/>
-                    <TagSmall label="tailwind"/>
-                    <TagSmall label="vitejs"/>
-                </ul>
-
-            </ProjectCard>
+			<footer class="statusbar">
+				<span><span class="status-dot"></span> {perfil.estado.izquierda}</span>
+				<span data-notice>{perfil.estado.centro}</span>
+				<a href={perfil.estado.repositorio} target="_blank" rel="noreferrer">ver código en github ↗</a>
+			</footer>
 		</section>
 
-		<!--
-		<LinksCard
-			link="https://github.com/valnhe"
-			alt="GitHub Logo"
-			img={staticGit.src}
-			class="[grid-area:github] bg-primarycolor"
-			classImage="object-contain"
-		/>
-
-		<LinksCard
-			link="https://www.linkedin.com/in/valentina-castillo-valdes/"
-			alt="LinkedIn Logo"
-			img={darkLinkedin.src}
-			img2={lightLinkedin.src}
-			class="[grid-area:linkedin] bg-secondarycolor"
-			classImage="object-contain"
-		/>
-		-->
-		
-		<Email/>
+		<Player />
 	</main>
+
+	<Notebook />
 </Layout>
 
+<script>
+	const $ = <T extends Element = HTMLElement>(s: string) => document.querySelector<T>(s)!;
+
+	// Pestañas
+	const tabs = document.querySelectorAll<HTMLButtonElement>('.tabs [role="tab"]');
+	function activate(tab: HTMLButtonElement) {
+		tabs.forEach((t) => {
+			const on = t === tab;
+			t.classList.toggle('active', on);
+			t.setAttribute('aria-selected', String(on));
+			t.tabIndex = on ? 0 : -1;
+			$(`#panel-${t.dataset.tab}`).hidden = !on;
+		});
+	}
+	const fromHash = [...tabs].find((t) => `#${t.dataset.tab}` === location.hash);
+	if (fromHash) activate(fromHash);
+	tabs.forEach((tab, i) => {
+		tab.addEventListener('click', () => {
+			activate(tab);
+			history.replaceState(null, '', `#${tab.dataset.tab}`);
+		});
+		tab.addEventListener('keydown', (e) => {
+			const dir = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
+			if (!dir) return;
+			const next = tabs[(i + dir + tabs.length) % tabs.length];
+			activate(next);
+			next.focus();
+		});
+	});
+
+	// Subpestañas de trayectoria (laboral / académica)
+	const subtabs = document.querySelectorAll<HTMLButtonElement>('[data-subtab]');
+	function activateSub(tab: HTMLButtonElement) {
+		subtabs.forEach((t) => {
+			const on = t === tab;
+			t.classList.toggle('active', on);
+			t.setAttribute('aria-selected', String(on));
+			t.tabIndex = on ? 0 : -1;
+			$(`#subpanel-${t.dataset.subtab}`).hidden = !on;
+		});
+	}
+	subtabs.forEach((tab, i) => {
+		tab.addEventListener('click', () => activateSub(tab));
+		tab.addEventListener('keydown', (e) => {
+			const dir = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
+			if (!dir) return;
+			const next = subtabs[(i + dir + subtabs.length) % subtabs.length];
+			activateSub(next);
+			next.focus();
+		});
+	});
+
+	// Ventana: maximizar, minimizar (agenda secreta) y el botón cerrar que se escapa
+	const win = $('[data-window]');
+	const maxBtn = $('[data-maximize]');
+	maxBtn.addEventListener('click', () => {
+		const on = win.classList.toggle('maximized');
+		maxBtn.setAttribute('aria-label', on ? 'Restaurar tamaño' : 'Maximizar');
+	});
+
+	const shell = $('[data-shell]');
+	const notebook = $('[data-notebook]');
+	$('[data-minimize]').addEventListener('click', () => {
+		shell.hidden = true;
+		notebook.hidden = false;
+		window.scrollTo(0, 0);
+	});
+	$('[data-restore]').addEventListener('click', () => {
+		notebook.hidden = true;
+		shell.hidden = false;
+	});
+
+	const closeBtn = $('[data-close]');
+	const notice = $('[data-notice]');
+	let moves = 0;
+	// Mientras la ventana cambia de tamaño, la X pasa bajo el puntero:
+	// ese "mouseenter" no cuenta como intento de cerrar.
+	let resizing = false;
+	const dodge = () => {
+		if (resizing) return;
+		closeBtn.classList.remove(`dodge-${moves}`);
+		moves = (moves + 1) % 5;
+		if (moves) closeBtn.classList.add(`dodge-${moves}`);
+		notice.textContent = 'todavía no me puedes cerrar';
+	};
+	closeBtn.addEventListener('click', dodge);
+	closeBtn.addEventListener('mouseenter', dodge);
+
+	// Al maximizar o restaurar, la X vuelve a su lugar y no se escapa durante la animación
+	const noticeDefault = notice.textContent;
+	let resizeTimer: ReturnType<typeof setTimeout>;
+	maxBtn.addEventListener('click', () => {
+		closeBtn.classList.remove(`dodge-${moves}`);
+		moves = 0;
+		notice.textContent = noticeDefault;
+		resizing = true;
+		clearTimeout(resizeTimer);
+		resizeTimer = setTimeout(() => (resizing = false), 450);
+	});
+
+	// Reproductor
+	const player = $('[data-player]');
+	const closePlayer = () => (player.hidden = true);
+	$('[data-open-player]').addEventListener('click', () => {
+		player.hidden = false;
+		player.querySelector<HTMLButtonElement>('.player-close')?.focus();
+	});
+	document.querySelectorAll('[data-close-player]').forEach((b) => b.addEventListener('click', closePlayer));
+	document.addEventListener('keydown', (e) => {
+		if (e.key === 'Escape' && !player.hidden) closePlayer();
+	});
+</script>

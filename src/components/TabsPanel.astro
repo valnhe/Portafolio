@@ -1,0 +1,128 @@
+---
+import trayectoria from '../data/trayectoria.json';
+import herramientas from '../data/herramientas.json';
+import proyectos from '../data/proyectos.json';
+
+const tabs = ['trayectoria', 'herramientas', 'proyectos'];
+let n = 0;
+const pad = (i: number) => String(i).padStart(2, '0');
+---
+
+<section class="browser-panel glass-panel">
+	<span class="paper" aria-hidden="true"></span>
+	<div class="tabs" role="tablist" aria-label="Contenido del portafolio">
+		{tabs.map((tab, i) => (
+			<button
+				role="tab"
+				id={`tab-${tab}`}
+				aria-controls={`panel-${tab}`}
+				aria-selected={i === 0 ? 'true' : 'false'}
+				tabindex={i === 0 ? 0 : -1}
+				class={i === 0 ? 'active' : ''}
+				data-tab={tab}
+			>
+				<span>{tab}</span>
+				<span class="tab-dot"></span>
+			</button>
+		))}
+	</div>
+
+	<div class="tab-content">
+		<div class="timeline" role="tabpanel" id="panel-trayectoria" aria-labelledby="tab-trayectoria">
+			<div class="timeline-head">
+				<p class="section-kicker">mi recorrido</p>
+				<div class="subtabs" role="tablist" aria-label="Tipo de trayectoria">
+					{trayectoria.map((seccion, i) => (
+						<button
+							role="tab"
+							id={`subtab-${seccion.id}`}
+							aria-controls={`subpanel-${seccion.id}`}
+							aria-selected={i === 0 ? 'true' : 'false'}
+							tabindex={i === 0 ? 0 : -1}
+							class={i === 0 ? 'active' : ''}
+							data-subtab={seccion.id}
+						>
+							{seccion.nombre}
+						</button>
+					))}
+				</div>
+			</div>
+
+			{trayectoria.map((seccion, i) => (
+				<div role="tabpanel" id={`subpanel-${seccion.id}`} aria-labelledby={`subtab-${seccion.id}`} hidden={i !== 0}>
+					{seccion.items.map((item) => (
+						<article class={item.destacado ? 'destacado' : undefined}>
+							<span class="timeline-year">
+								{item.periodo}
+								{item.etiqueta && <small>{item.etiqueta}</small>}
+							</span>
+							<div>
+								<h2>{item.cargo}</h2>
+								{item.insignia && <span class="insignia">✦ {item.insignia}</span>}
+								<p class="timeline-place">{item.lugar}</p>
+								{item.cargos && (
+									<ol class="timeline-roles">
+										{item.cargos.map((c) => (
+											<li>
+												<div class="role-head">
+													<span>{c.cargo}</span>
+													<small>{c.periodo}</small>
+												</div>
+												{c.plataforma && <span class="role-platform">{c.plataforma}</span>}
+												{c.descripcion && <p>{c.descripcion}</p>}
+												{c.chips?.length > 0 && (
+													<div class="chips">{c.chips.map((t) => <span>{t}</span>)}</div>
+												)}
+											</li>
+										))}
+									</ol>
+								)}
+								{item.descripcion && <p>{item.descripcion}</p>}
+								{item.puntos && (
+									<ul class="timeline-points">
+										{item.puntos.map((p) => <li>{p}</li>)}
+									</ul>
+								)}
+								{item.chips?.length > 0 && (
+									<div class="chips">{item.chips.map((c) => <span>{c}</span>)}</div>
+								)}
+							</div>
+						</article>
+					))}
+				</div>
+			))}
+		</div>
+
+		<div class="tools-view" role="tabpanel" id="panel-herramientas" aria-labelledby="tab-herramientas" hidden>
+			<p class="section-kicker">mi caja de herramientas</p>
+			{herramientas.grupos.map((grupo) => (
+				<div class="tool-group">
+					<p class="tool-group-name">{grupo.nombre}</p>
+					<div class="tool-grid">
+						{grupo.items.map((tool) => (
+							<div><span>{pad(++n)}</span>{tool}</div>
+						))}
+					</div>
+				</div>
+			))}
+		</div>
+
+		<div class="projects-view" role="tabpanel" id="panel-proyectos" aria-labelledby="tab-proyectos" hidden>
+			<p class="section-kicker">selección de proyectos</p>
+			{proyectos.map((p) => (
+				<a href={p.url} target="_blank" rel="noreferrer">
+					<span class="project-index">↗</span>
+					<span class="project-main">
+						<strong>{p.nombre}</strong>
+						<span class="project-desc">{p.descripcion}</span>
+						{p.tags?.length > 0 && (
+							<span class="chips">{p.tags.map((t) => <span>{t}</span>)}</span>
+						)}
+					</span>
+					<span class="project-kind">{p.tipo}</span>
+					<small>{p.anio}</small>
+				</a>
+			))}
+		</div>
+	</div>
+</section>

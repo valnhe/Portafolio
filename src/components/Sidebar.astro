@@ -1,0 +1,91 @@
+---
+import perfil from '../data/perfil.json';
+import { fetchContributions, heatmapHtml, totalLabel, usernameFrom } from '../lib/github';
+
+// Se consulta al compilar (para que la página nunca salga vacía)
+// y el navegador vuelve a pedir los datos al abrirla, así queda al día.
+const githubUser = usernameFrom(perfil.links.github);
+const contrib = await fetchContributions(githubUser);
+---
+
+<aside class="sidebar">
+	<section class="calendar-card glass-panel">
+		<span class="paper" aria-hidden="true"></span>
+		<div class="panel-heading">
+			<span>calendario</span>
+			<span data-calendar-label></span>
+		</div>
+		<div class="weekday-row">
+			{['L', 'M', 'X', 'J', 'V', 'S', 'D'].map((d) => <span>{d}</span>)}
+		</div>
+		<div class="calendar-grid" data-calendar-grid></div>
+		<p><span class="tiny-star">✦</span> hoy: crear algo bonito</p>
+	</section>
+
+	<section class="activity-card glass-panel">
+		<span class="paper" aria-hidden="true"></span>
+		<div class="panel-heading">
+			<span>actividad en github</span>
+			<a href={perfil.links.github} target="_blank" rel="noreferrer" data-gh-total>
+				{contrib ? totalLabel(contrib.total) : 'ver perfil ↗'}
+			</a>
+		</div>
+		<div
+			class="heatmap"
+			role="img"
+			aria-label="Mapa de contribuciones en GitHub del último año"
+			data-gh-heatmap
+			data-gh-user={githubUser}
+			set:html={contrib ? heatmapHtml(contrib.days) : ''}
+		/>
+		<div class="heatmap-legend">
+			<span>menos</span>
+			{[0, 1, 2, 3, 4].map((level) => <i class={`level-${level}`}></i>)}
+			<span>más</span>
+		</div>
+	</section>
+</aside>
+
+<script>
+	import { fetchContributions, heatmapHtml, totalLabel } from '../lib/github';
+
+	// Actividad de GitHub: refresca con los datos más recientes al abrir la página
+	const heatmap = document.querySelector<HTMLElement>('[data-gh-heatmap]');
+	const total = document.querySelector('[data-gh-total]');
+	if (heatmap?.dataset.ghUser) {
+		fetchContributions(heatmap.dataset.ghUser).then((data) => {
+			if (!data) return;
+			heatmap.innerHTML = heatmapHtml(data.days);
+			if (total) total.textContent = totalLabel(data.total);
+		});
+	}
+
+	// El calendario se arma en el navegador para que siempre muestre el mes actual.
+	const label = document.querySelector('[data-calendar-label]');
+	const grid = document.querySelector('[data-calendar-grid]');
+	if (label && grid) {
+		const now = new Date();
+		const y = now.getFullYear();
+		const m = now.getMonth();
+		label.textContent = `${String(m + 1).padStart(2, '0')} / ${y}`;
+		const offset = (new Date(y, m, 1).getDay() + 6) % 7; // lunes = 0
+		const daysInMonth = new Date(y, m + 1, 0).getDate();
+		const daysPrev = new Date(y, m, 0).getDate();
+		const cells = Math.ceil((offset + daysInMonth) / 7) * 7;
+		for (let i = 0; i < cells; i++) {
+			const span = document.createElement('span');
+			const day = i - offset + 1;
+			if (day < 1) {
+				span.textContent = String(daysPrev + day);
+				span.className = 'muted';
+			} else if (day > daysInMonth) {
+				span.textContent = String(day - daysInMonth);
+				span.className = 'muted';
+			} else {
+				span.textContent = String(day);
+				if (day === now.getDate()) span.className = 'today';
+			}
+			grid.appendChild(span);
+		}
+	}
+</script>

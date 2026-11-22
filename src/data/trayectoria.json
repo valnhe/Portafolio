@@ -1,0 +1,123 @@
+[
+  {
+    "id": "laboral",
+    "nombre": "laboral",
+    "items": [
+      {
+        "periodo": "nov 2025 — hoy",
+        "cargo": "eGenya",
+        "lugar": "Concón, Chile",
+        "cargos": [
+          {
+            "cargo": "Desarrolladora de Software",
+            "periodo": "oct 2026 — hoy",
+            "plataforma": "eGenya 2 · Legacy",
+            "descripcion": "Parte del equipo que construye eGenya 2, la nueva versión de la plataforma: 100% serverless en AWS con Lambda, Hono y DynamoDB, y frontends en React y Next.js. Desarrollo funcionalidades de punta a punta entre sus servicios, y en paralelo sigo evolucionando el módulo de gestión de camas hospitalarias en Legacy.",
+            "chips": [
+              "AWS Lambda",
+              "Hono",
+              "DynamoDB",
+              "React",
+              "Next.js",
+              "Tailwind"
+            ]
+          },
+          {
+            "cargo": "Desarrolladora de Software · Part-Time",
+            "periodo": "mar — jun 2026",
+            "plataforma": "eGenya Legacy",
+            "descripcion": "Desarrollo Full Stack con Next.js, NestJS y MongoDB. Construí la pre-asignación de camas y las fechas de alta probable del sistema de gestión hospitalaria, en web y móvil, con Cron Jobs que actualizan estados según reglas de tiempo. También configuré la incorporación de nuevos clientes a la plataforma.",
+            "chips": [
+              "Next.js",
+              "NestJS",
+              "MongoDB",
+              "MUI",
+              "Cron Jobs"
+            ]
+          },
+          {
+            "cargo": "Desarrolladora de Software · Práctica Profesional",
+            "periodo": "nov 2025 — feb 2026",
+            "plataforma": "eGenya Legacy",
+            "descripcion": "Mi llegada al equipo. Implementé un sistema de SLA para la plataforma configurable de gestión de tareas, con tiempos máximos por etapa, cálculo automático de días de atraso y avisos por correo. Además participé en QA funcional, levantamiento de requisitos y documentación.",
+            "chips": [
+              "NestJS",
+              "Next.js",
+              "TypeScript",
+              "QA"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "academica",
+    "nombre": "académica",
+    "items": [
+      {
+        "periodo": "2020 — 2026",
+        "etiqueta": "educación",
+        "cargo": "Ingeniería Civil Informática",
+        "lugar": "Universidad Técnica Federico Santa María",
+        "descripcion": "Titulada en agosto de 2026.",
+        "chips": [
+          "Ingeniería de Software",
+          "UX"
+        ],
+        "destacado": true,
+        "insignia": "distinción máxima"
+      },
+      {
+        "periodo": "ago 2023 — nov 2026",
+        "etiqueta": "ayudantías",
+        "cargo": "Universidad Técnica Federico Santa María",
+        "lugar": "Ayudantías · Valparaíso, Chile",
+        "cargos": [
+          {
+            "cargo": "Ayudante de Feria de Software · Coordinadora",
+            "periodo": "mar — nov 2026",
+            "descripcion": "Coordiné al equipo de ayudantes junto al profesor responsable en la planificación y ejecución de la asignatura. Acompañé a los equipos de estudiantes en sus proyectos de software, desde el levantamiento de requisitos hasta la implementación, y coordiné las comunicaciones, actividades y entregas del curso.",
+            "chips": [
+              "Coordinación",
+              "Gestión de proyectos",
+              "Mentoría"
+            ]
+          },
+          {
+            "cargo": "Ayudante de Análisis y Diseño de Software",
+            "periodo": "mar 2025 — jun 2026",
+            "descripcion": "Guié a equipos de estudiantes en el desarrollo de proyectos de software, desde el levantamiento y análisis de requisitos hasta la implementación. También revisé y evalué entregas considerando requerimientos, diseño y cumplimiento de objetivos.",
+            "chips": [
+              "Análisis",
+              "Diseño de software",
+              "Docencia"
+            ]
+          },
+          {
+            "cargo": "Ayudante de Aula · Inteligencia Artificial",
+            "periodo": "ago — nov 2025",
+            "descripcion": "Guié a los grupos en el desarrollo de su proyecto, apoyando el modelamiento de problemas de optimización, el diseño de algoritmos y su implementación en código. También revisé y evalué informes y entregas según los objetivos y criterios de calidad del curso.",
+            "chips": [
+              "Comunicación",
+              "Responsabilidad",
+              "Evaluación de software",
+              "Trabajo en equipo"
+            ]
+          },
+          {
+            "cargo": "Ayudante de Aula · Arquitectura y Organización de Computadores",
+            "periodo": "ago 2023 — jul 2024",
+            "descripcion": "Diseñé, presenté y expliqué ejercicios de electrónica digital enfocados a la informática ante alrededor de 25 estudiantes, además de diseñar y revisar tareas sobre el tema.",
+            "chips": [
+              "Comunicación",
+              "Responsabilidad",
+              "Atención dirigida",
+              "Educación"
+            ]
+          }
+        ]
+      }
+    ]
+  }
+]

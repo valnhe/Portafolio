@@ -1,172 +1,38 @@
 ---
-import { ViewTransitions } from 'astro:transitions';
-import Nav from '../components/nav.astro';
 import { SEO } from 'astro-seo';
-import type { Code } from 'astro:components';
+import perfil from '../data/perfil.json';
+import '../styles/global.css';
 
-
-interface Props {
-	title: string;
-}
-
-const { title } = Astro.props;
+const { titulo = perfil.seo.titulo } = Astro.props as { titulo?: string };
 ---
 
 <!doctype html>
-<html lang="en" id="main-app">
+<html lang="es">
 	<head>
-		<SEO 
-			title={title} 
-			description="Me enfoco en fusionar la creatividad y la tecnología para ofrecer soluciones bonitas. 🩷"
+		<SEO
+			title={titulo}
+			description={perfil.seo.descripcion}
 			charset="UTF-8"
 			openGraph={{
 				basic: {
-					title: title,
-					type: "website",
-					image: "https://i.imgur.com/1UsFCmR.jpeg",
-					url: "https://valnhe.netlify.app"
-				}
+					title: titulo,
+					type: 'website',
+					image: new URL('/assets/cat-clouds.png', perfil.seo.url).href,
+					url: perfil.seo.url,
+				},
 			}}
-		
 		/>
-
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/1F338.svg" />
-		<link rel="preconnect" href="https://fonts.googleapis.com">
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="icon" type="image/png" href="/favicon.png" />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Manrope:wght@400;500;600&display=swap"
+			rel="stylesheet"
+		/>
 		<meta name="generator" content={Astro.generator} />
-		<ViewTransitions />
 	</head>
-	<body class="bg-bkg transition-color ease-in-out duration-200">
-		<Nav/>
+	<body>
 		<slot />
 	</body>
 </html>
-
-<style>
-	body {
-		padding: 30px;
-		opacity: 1;
-		background-image:  linear-gradient(90deg,hsla(0,0%,90%,.4) 1px,transparent 0),linear-gradient(180deg,hsla(0,0%,90%,.4) 1px,transparent 0);
-		background-size: 90px 90px; 
-		margin: auto;
-	}
-
-	@media (min-width: 1024px) {
-		body {
-			padding: 64px 0px;
-			max-width: 80%;
-		}
-	}
-
-	@media (min-width: 1280px) {
-		body {
-			padding: 40px 0px;
-			max-width: 75%;
-		}
-	}
-
-	@media (min-width: 1536px) {
-		body {
-			padding: 64px 0px;
-			max-width: 65%;
-		}
-	}
-
-</style>
-
-<style is:global>
-
-	@tailwind base;
-	@tailwind components;
-	@tailwind utilities;
-
-	@layer base {
-		:root {
-			--color-bkg: 255 255 254;
-			--color-primarycolor: 35 41 70;
-			--color-secondarycolor: 179 187 228;
-			--color-ternarycolor: 236 164 188;
-		}
-
-		:root[data-theme="dark"]{
-			--color-bkg: 63 55 98;
-			--color-primarycolor: 53 45 83;
-			--color-secondarycolor: 236 164 188;
-			--color-ternarycolor: 179 187 228;
-		}
-	}
-
-	
-	#app {
-		display: grid;
-		grid-template-areas: 
-			"nav nav nav nav nav nav"
-			"theme theme theme theme theme theme"
-			"about about about about about about"
-			"tecno tecno tecno tecno tecno tecno"
-			"project project project project project project"
-			"email email email email email email"
-			;
-
-		grid-template-columns: repeat(6, 1fr);
-		grid-template-rows: auto 80px repeat(4, auto);
-		gap: 17px;
-	}
-
-	#project {
-			display: grid;
-			grid-template-columns: repeat(4, auto);
-			grid-template-rows: repeat(6, auto);
-			grid-template-areas: 
-				"nav nav nav nav"
-				"about about about about"
-				"theme theme theme link"
-				"p2 p2 p2 p2"
-				"p1 p1 p1 p1"
-				"small small small small"
-			;
-
-			gap: 17px;
-		}
-
-	@media (min-width: 1024px) and (orientation: landscape) {
-		#app {
-			grid-template-columns: repeat(5, 1fr) 2fr;
-			grid-template-rows: auto 80px auto auto auto;
-			grid-template-areas: 
-				"nav nav nav nav nav nav"
-				"about about about about theme theme"
-				"about about about about project project"
-				"tecno tecno tecno tecno project project"
-				"email email email email email email"
-			;
-		}
-
-		#project {
-			grid-template-columns: repeat(4, 1fr);
-			grid-template-rows: auto 86px auto auto auto;
-			grid-template-areas: 
-				"nav nav nav nav"
-				"about about about theme"
-				"about about about link"
-				"p2 p2 small small"
-				"p1 p1 small small"
-			;
-
-			gap: 17px;
-		}
-	}
-	
-	html {
-		font-family: 'Inter', sans-serif;
-		box-sizing: border-box;
-		scroll-behavior: smooth;
-	}
-	
-</style>
-
-<script>
-
-</script>

@@ -1,0 +1,34 @@
+[
+  {
+    "nombre": "Ingesub SpA",
+    "tipo": "Sitio institucional",
+    "anio": "2026",
+    "descripcion": "Sitio web de una empresa de ingeniería marítima y submarina. Levanté los requisitos con el cliente y lo llevé hasta producción, con contenido editable desde un CMS y formulario de contacto.",
+    "url": "https://www.ingesub.com/",
+    "tags": ["Astro", "Tailwind", "Decap CMS", "Cloudflare Pages"]
+  },
+  {
+    "nombre": "TeacHear",
+    "tipo": "App web con IA",
+    "anio": "2025",
+    "descripcion": "Apoya a docentes en la evaluación del dominio lector de estudiantes de educación básica. Ganador del Premio de Rendimiento Académico, 33.ª Feria de Software UTFSM.",
+    "url": "https://teachear.feriadesoftware.cl",
+    "tags": ["Next.js", "NestJS", "TypeScript", "MongoDB"]
+  },
+  {
+    "nombre": "Translate App",
+    "tipo": "Traductor web",
+    "anio": "",
+    "descripcion": "Traduce texto con la API de MyMemory y permite copiar y escuchar el texto original y traducido.",
+    "url": "https://translate-app-valnhe.netlify.app",
+    "tags": ["React", "Tailwind", "Vite"]
+  },
+  {
+    "nombre": "GitHub Profile Visualizer",
+    "tipo": "Consumo de API",
+    "anio": "",
+    "descripcion": "Usa la API de GitHub para mostrar el perfil de cualquier usuario: seguidores, seguidos, ubicación y repositorios.",
+    "url": "https://github-profile-valnhe.netlify.app",
+    "tags": ["React", "Tailwind", "Vite"]
+  }
+]

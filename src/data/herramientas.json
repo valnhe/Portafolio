@@ -1,0 +1,65 @@
+{
+  "grupos": [
+    {
+      "nombre": "tecnologías",
+      "items": [
+        "TypeScript",
+        "JavaScript",
+        "React",
+        "Next.js",
+        "NestJS",
+        "Node.js",
+        "Hono",
+        "MongoDB",
+        "SQL",
+        "Tailwind CSS",
+        "MUI",
+        "Zustand",
+        "TanStack Query",
+        "Vite",
+        "Astro"
+      ]
+    },
+    {
+      "nombre": "nube y serverless",
+      "items": [
+        "AWS Lambda",
+        "DynamoDB",
+        "EventBridge"
+      ]
+    },
+    {
+      "nombre": "herramientas y prácticas",
+      "items": [
+        "Git",
+        "GitHub",
+        "REST APIs",
+        "Firebase",
+        "Metabase",
+        "Figma",
+        "QA",
+        "Testing",
+        "Vitest",
+        "Cron Jobs"
+      ]
+    },
+    {
+      "nombre": "hardware",
+      "items": [
+        "AMD Ryzen 5 5500 · 6 núcleos",
+        "32 GB RAM",
+        "AMD Radeon RX 7600",
+        "SSD NVMe 1 TB · XPG GAMMIX S60",
+        "Placa Gigabyte B550M K",
+        "Windows 11 + WSL (Ubuntu)"
+      ]
+    },
+    {
+      "nombre": "idiomas",
+      "items": [
+        "Español nativo",
+        "Inglés B1"
+      ]
+    }
+  ]
+}

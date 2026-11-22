@@ -1,0 +1,73 @@
+---
+import perfil from '../data/perfil.json';
+
+const months = [
+	'enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio',
+	'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre',
+];
+---
+
+<main class="blank-page" data-notebook hidden>
+	<div class="notebook-scene">
+		<div class="notebook">
+			<div class="leather-cover"></div>
+			<div class="notebook-tabs" aria-label="Meses del año">
+				{months.map((month, index) => (
+					<button
+						aria-label={month}
+						aria-pressed="false"
+						data-month={index}
+						style={`--tab-index: ${index}`}
+					>
+						<span>{month.slice(0, 3)}</span>
+					</button>
+				))}
+			</div>
+
+			<div class="notebook-paper">
+				<div class="binder-spine" aria-hidden="true">
+					{[0, 1, 2, 3, 4, 5].map(() => <i></i>)}
+				</div>
+				<div class="notebook-page">
+					<div class="page-date">
+						<span data-notebook-month-num></span>
+						<span data-notebook-year></span>
+					</div>
+					<p class="notebook-overline">{perfil.agenda.titulo}</p>
+					<h1 data-notebook-month></h1>
+					<div class="handwritten-note">
+						<span>cosas para recordar:</span>
+						<p>{perfil.agenda.nota}</p>
+					</div>
+					<div class="page-doodle" aria-hidden="true">
+						<span>·</span><span>ᴗ</span><span>·</span>
+					</div>
+					<button class="restore-note" data-restore>
+						volver al portafolio
+						<span>↗</span>
+					</button>
+				</div>
+			</div>
+		</div>
+		<p class="easter-caption">encontraste la agenda secreta</p>
+	</div>
+</main>
+
+<script define:vars={{ months }}>
+	const book = document.querySelector('[data-notebook]');
+	const buttons = book.querySelectorAll('[data-month]');
+	const year = new Date().getFullYear();
+	book.querySelector('[data-notebook-year]').textContent = year;
+
+	function select(index) {
+		buttons.forEach((b, i) => {
+			b.classList.toggle('selected', i === index);
+			b.setAttribute('aria-pressed', String(i === index));
+		});
+		book.querySelector('[data-notebook-month]').textContent = months[index];
+		book.querySelector('[data-notebook-month-num]').textContent = String(index + 1).padStart(2, '0');
+	}
+
+	buttons.forEach((b, i) => b.addEventListener('click', () => select(i)));
+	select(new Date().getMonth());
+</script>

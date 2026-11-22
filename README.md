@@ -24,7 +24,43 @@ Portafolio by valnhe
 ## 🛠️ Stack
 
 - [**Astro**](https://astro.build/) - The web framework for content-driven websites.
-- [**Tailwindcss**](https://tailwindcss.com/) - A utility-first CSS framework for rapidly building custom designs.
+
+## ✏️ Editar el contenido
+
+Todo el contenido vive en `src/data/`, no hace falta tocar componentes:
+
+| Archivo | Qué contiene |
+| :-- | :-- |
+| `perfil.json` | Nombre, rol, texto de presentación, links (GitHub, LinkedIn, correo, CV), canción del reproductor, textos de la barra de estado y de la agenda secreta, SEO |
+| `trayectoria.json` | Experiencia laboral, académica y educación (pestaña *trayectoria*). `puntos` y `chips` son opcionales |
+| `herramientas.json` | Grupos de tecnologías/herramientas (pestaña *herramientas*) |
+| `proyectos.json` | Proyectos (pestaña *proyectos*). `anio` y `tags` son opcionales |
+
+En `perfil.intro`, `**texto**` se subraya en rosado y `__texto__` en azul.
+El CV que se descarga está en `public/documents/CV_ValentinaCastillo.pdf`.
+
+Las pestañas se pueden enlazar directo: `/#trayectoria`, `/#herramientas`, `/#proyectos`.
+
+## 🎵 Vinilo conectado a Spotify
+
+El vinilo muestra lo que suena en tu Spotify (o lo último que escuchaste) mediante la función
+`netlify/functions/now-playing.mts`, publicada en `/api/now-playing`.
+Si la función no responde, se muestra la canción de respaldo de `perfil.json` (`cancion`).
+
+Configuración (una sola vez):
+
+1. Crea una app en [developer.spotify.com/dashboard](https://developer.spotify.com/dashboard)
+   con la Redirect URI `http://127.0.0.1:8888/callback` y la API **Web API**.
+2. Obtén tu refresh token:
+
+   ```bash
+   SPOTIFY_CLIENT_ID=xxx SPOTIFY_CLIENT_SECRET=yyy npm run spotify:auth
+   ```
+
+3. En Netlify → *Site configuration* → *Environment variables*, agrega
+   `SPOTIFY_CLIENT_ID`, `SPOTIFY_CLIENT_SECRET` y `SPOTIFY_REFRESH_TOKEN`, y vuelve a desplegar.
+
+Para probar la función en local usa `npx netlify dev` (con `npm run dev` se ve la canción de respaldo).
 
 ## 🚀 Getting Started
 

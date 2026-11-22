@@ -1,0 +1,125 @@
+---
+import perfil from '../data/perfil.json';
+// Canción de respaldo: se muestra si /api/now-playing no responde (por ejemplo, en `npm run dev`).
+const { cancion } = perfil;
+---
+
+<div class="player-overlay" role="dialog" aria-modal="true" aria-label="Canción actual" data-player hidden>
+	<button class="player-backdrop" aria-label="Cerrar reproductor" data-close-player></button>
+	<div class="floating-player">
+		<button class="player-close" aria-label="Cerrar" data-close-player>×</button>
+		<p class="floating-kicker">
+			<span class="playing-bars" aria-hidden="true" data-np-bars><i></i><i></i><i></i></span>
+			<span data-np-kicker>currently listening</span>
+		</p>
+		<div class="floating-record" data-np-record>
+			<div class="floating-groove groove-one"></div>
+			<div class="floating-groove groove-two"></div>
+			<div class="floating-label">
+				<small data-np-state>now playing</small>
+				<strong data-np-title>{cancion.titulo}</strong>
+				<span data-np-artist>{cancion.artista}</span>
+				<i></i>
+			</div>
+		</div>
+		<div class="floating-time">
+			<span data-np-current>{cancion.actual}</span>
+			<i><b data-np-bar></b></i>
+			<span data-np-duration>{cancion.duracion}</span>
+		</div>
+		<a class="floating-link" data-np-link href="#" target="_blank" rel="noreferrer" hidden>abrir en spotify ↗</a>
+	</div>
+</div>
+
+<script>
+	interface NowPlaying {
+		isPlaying: boolean;
+		title: string;
+		artist: string;
+		image: string | null;
+		url: string;
+		progressMs: number;
+		durationMs: number;
+	}
+
+	const q = <T extends HTMLElement = HTMLElement>(s: string) => document.querySelector<T>(s);
+	const el = {
+		player: q('[data-player]'),
+		record: q('[data-np-record]'),
+		kicker: q('[data-np-kicker]'),
+		bars: q('[data-np-bars]'),
+		state: q('[data-np-state]'),
+		title: q('[data-np-title]'),
+		artist: q('[data-np-artist]'),
+		current: q('[data-np-current]'),
+		duration: q('[data-np-duration]'),
+		bar: q('[data-np-bar]'),
+		link: q<HTMLAnchorElement>('[data-np-link]'),
+		peek: q('[data-np-peek]'),
+	};
+
+	const fmt = (ms: number) => {
+		const s = Math.max(0, Math.floor(ms / 1000));
+		return `${Math.floor(s / 60)}:${String(s % 60).padStart(2, '0')}`;
+	};
+
+	let track: NowPlaying | null = null;
+	let syncedAt = 0;
+	let ticker: ReturnType<typeof setInterval> | undefined;
+
+	function paintProgress() {
+		if (!track || !el.current || !el.bar) return;
+		const elapsed = track.isPlaying ? Date.now() - syncedAt : 0;
+		const progress = Math.min(track.durationMs, track.progressMs + elapsed);
+		el.current.textContent = fmt(progress);
+		el.bar.style.width = `${track.durationMs ? (progress / track.durationMs) * 100 : 0}%`;
+		// Terminó la canción: pregunta cuál viene
+		if (track.isPlaying && progress >= track.durationMs) refresh();
+	}
+
+	function render(t: NowPlaying) {
+		track = t;
+		syncedAt = Date.now();
+		const playing = t.isPlaying;
+		el.kicker!.textContent = playing ? 'currently listening' : 'recently played';
+		el.state!.textContent = playing ? 'now playing' : 'last played';
+		el.title!.textContent = t.title;
+		el.artist!.textContent = t.artist;
+		el.duration!.textContent = fmt(t.durationMs);
+		el.bars!.hidden = !playing;
+		el.current!.parentElement!.hidden = !playing; // la barra de tiempo solo tiene sentido si está sonando
+		el.record!.classList.toggle('paused', !playing);
+		el.record!.style.setProperty('--cover', t.image ? `url("${t.image}")` : 'none');
+		el.record!.classList.toggle('has-cover', Boolean(t.image));
+		if (el.peek) el.peek.innerHTML = playing ? 'currently <strong>listening</strong>' : 'recently <strong>played</strong>';
+		if (t.url && el.link) {
+			el.link.href = t.url;
+			el.link.hidden = false;
+		}
+		clearInterval(ticker);
+		paintProgress();
+		if (playing) ticker = setInterval(paintProgress, 1000);
+	}
+
+	let loading = false;
+	async function refresh() {
+		if (loading) return;
+		loading = true;
+		try {
+			const res = await fetch('/api/now-playing', { cache: 'no-store' });
+			if (res.ok) render(await res.json());
+		} catch {
+			// Sin conexión con la función: se queda la canción de respaldo
+		} finally {
+			loading = false;
+		}
+	}
+
+	refresh();
+	// Al abrir el reproductor, datos frescos
+	document.querySelector('[data-open-player]')?.addEventListener('click', refresh);
+	// Mientras está abierto, vuelve a consultar cada 30 s (por si cambias de canción)
+	setInterval(() => {
+		if (el.player && !el.player.hidden) refresh();
+	}, 30000);
+</script>

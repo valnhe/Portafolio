@@ -267,7 +267,7 @@
   --tilt: 0.35deg;
   display: grid;
   min-height: 310px;
-  grid-template-columns: minmax(0, 1fr) 230px;
+  grid-template-columns: minmax(0, 1fr);
   gap: clamp(20px, 3vw, 38px);
   padding: clamp(28px, 4vw, 52px) clamp(24px, 4vw, 48px);
   border-radius: 9px 15px 11px 17px;
@@ -395,7 +395,6 @@ h1 {
   z-index: 1;
   isolation: isolate;
   --tilt: -1.4deg;
-  align-self: end;
   padding: 21px;
   border-radius: 12px;
 }
@@ -477,7 +476,13 @@ h1 {
   display: grid;
   grid-template-columns: minmax(0, 1.7fr) minmax(270px, 0.74fr);
   gap: 18px;
-  margin-top: 18px;
+}
+
+.main-column {
+  display: grid;
+  align-content: start;
+  gap: 18px;
+  min-width: 0;
 }
 
 .browser-panel {
@@ -1341,14 +1346,9 @@ h1 {
   to { transform: rotate(-360deg); }
 }
 
-@media (max-width: 960px) {
-  .intro-card { grid-template-columns: minmax(0, 1fr) 230px; }
-}
-
 @media (max-width: 820px) {
   .site-shell { padding: 14px; }
   .intro-card { grid-template-columns: 1fr; }
-  .contact-box { width: min(100%, 300px); }
   .content-grid { grid-template-columns: 1fr; }
   .sidebar { grid-template-columns: 1fr 1fr; }
 }
@@ -1362,9 +1362,8 @@ h1 {
   .music-peek { top: 22px; right: -5px; left: auto; border-radius: 18px 0 0 18px; transform: none; }
   .music-peek:hover { right: 0; left: auto; }
   .intro-card { min-height: auto; grid-template-columns: 1fr; padding: 26px 22px; }
-  .contact-box { width: min(100%, 300px); }
   h1 { font-size: 31px; }
-  .content-grid { gap: 12px; margin-top: 12px; }
+  .content-grid, .main-column { gap: 12px; }
   .sidebar { grid-template-columns: 1fr; gap: 12px; }
   .timeline article { grid-template-columns: 1fr; gap: 9px; }
   .projects-view > a { grid-template-columns: 28px 1fr 42px; }
@@ -1733,7 +1732,7 @@ h1 {
 
 /* Móvil: más aire entre tarjetas para que las cintas no toquen la tarjeta de arriba */
 @media (max-width: 590px) {
-  .content-grid { gap: 26px; margin-top: 26px; }
+  .content-grid, .main-column { gap: 26px; }
   .sidebar { gap: 26px; }
 }
 
@@ -1976,3 +1975,23 @@ h1 {
 }
 
 .window-actions button[aria-disabled='true']:hover { background: rgba(255, 255, 255, 0.48); }
+
+/* Tablet y móvil: una sola columna, con "encuéntrame aquí" justo bajo la intro */
+@media (max-width: 820px) {
+  .content-grid { grid-template-columns: 1fr 1fr; }
+  .main-column,
+  .sidebar { display: contents; }
+  .intro-card { order: 1; grid-column: 1 / -1; }
+  .contact-box { order: 2; grid-column: 1 / -1; }
+  .browser-panel { order: 3; grid-column: 1 / -1; }
+  .calendar-card,
+  .activity-card { order: 4; }
+}
+
+@media (max-width: 590px) {
+  .content-grid { grid-template-columns: 1fr; }
+}
+
+/* Easter egg al minimizar */
+.easter-egg-card { z-index: 1; text-align: center; }
+.easter-egg-card h1 { margin-bottom: 18px; font-size: 30px; }

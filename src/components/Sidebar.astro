@@ -1,14 +1,50 @@
 ---
+import Icon from './Icon.astro';
 import perfil from '../data/perfil.json';
 import { fetchContributions, heatmapHtml, totalLabel, usernameFrom } from '../lib/github';
 
 // Se consulta al compilar (para que la página nunca salga vacía)
 // y el navegador vuelve a pedir los datos al abrirla, así queda al día.
+const { links } = perfil;
 const githubUser = usernameFrom(perfil.links.github);
 const contrib = await fetchContributions(githubUser);
 ---
 
 <aside class="sidebar">
+	<div class="contact-box">
+		<span class="paper" aria-hidden="true"></span>
+		<p>encuéntrame aquí</p>
+		<nav aria-label="Redes y contacto">
+			<a
+				aria-label="GitHub"
+				href={links.github}
+				rel="noreferrer"
+				target="_blank"
+			>
+				<Icon type="github" />
+			</a>
+			<a
+				aria-label="LinkedIn"
+				href={links.linkedin}
+				rel="noreferrer"
+				target="_blank"
+			>
+				<Icon type="linkedin" />
+			</a>
+			<a aria-label="Correo" href={`mailto:${links.email}`}>
+				<Icon type="mail" />
+			</a>
+		</nav>
+		<a class="cv-button" href={links.cv} download>
+			<Icon type="download" />
+			Descargar CV
+		</a>
+		<span class="available">
+			<span class="status-dot"></span>
+			{perfil.disponible}
+		</span>
+	</div>
+
 	<section class="calendar-card glass-panel">
 		<span class="paper" aria-hidden="true"></span>
 		<div class="panel-heading">

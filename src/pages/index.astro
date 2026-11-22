@@ -3,7 +3,7 @@ import Layout from '../layouts/Layout.astro';
 import Intro from '../components/Intro.astro';
 import TabsPanel from '../components/TabsPanel.astro';
 import Sidebar from '../components/Sidebar.astro';
-import Notebook from '../components/Notebook.astro';
+import EasterEgg from '../components/EasterEgg.astro';
 import Player from '../components/Player.astro';
 import perfil from '../data/perfil.json';
 ---
@@ -23,16 +23,18 @@ import perfil from '../data/perfil.json';
 					<span class="online-label">online</span>
 				</div>
 				<div class="window-actions" aria-label="Controles de ventana">
-					<button aria-label="Minimizar (en pausa)" aria-disabled="true" title="próximamente" data-minimize><span class="minimize-symbol"></span></button>
+					<button aria-label="Minimizar" data-minimize><span class="minimize-symbol"></span></button>
 					<button aria-label="Maximizar" data-maximize><span class="maximize-symbol"></span></button>
 					<button aria-label="Cerrar" class="close-button" data-close><span></span></button>
 				</div>
 			</header>
 
 			<div class="window-body">
-				<Intro />
 				<div class="content-grid">
-					<TabsPanel />
+					<div class="main-column">
+						<Intro />
+						<TabsPanel />
+					</div>
 					<Sidebar />
 				</div>
 			</div>
@@ -47,7 +49,7 @@ import perfil from '../data/perfil.json';
 		<Player />
 	</main>
 
-	<Notebook />
+	<EasterEgg />
 </Layout>
 
 <script>
@@ -102,7 +104,7 @@ import perfil from '../data/perfil.json';
 		});
 	});
 
-	// Ventana: maximizar, minimizar (agenda secreta) y el botón cerrar que se escapa
+	// Ventana: maximizar, minimizar (easter egg) y el botón cerrar que se escapa
 	const win = $('[data-window]');
 	const maxBtn = $('[data-maximize]');
 	maxBtn.addEventListener('click', () => {
@@ -115,21 +117,15 @@ import perfil from '../data/perfil.json';
 	});
 
 	const shell = $('[data-shell]');
-	const notebook = $('[data-notebook]');
-	// Minimizar (agenda secreta) en pausa por ahora: cambia a true para reactivarlo
-	// y quita aria-disabled del botón.
-	const MINIMIZAR_ACTIVO = false;
+	const easterEgg = $('[data-easter-egg]');
 	$('[data-minimize]').addEventListener('click', () => {
-		if (!MINIMIZAR_ACTIVO) {
-			$('[data-notice]').textContent = 'minimizar está en pausa por ahora';
-			return;
-		}
 		shell.hidden = true;
-		notebook.hidden = false;
+		easterEgg.hidden = false;
 		window.scrollTo(0, 0);
 	});
-	$('[data-restore]').addEventListener('click', () => {
-		notebook.hidden = true;
+	$('[data-easter-back]').addEventListener('click', (e) => {
+		e.preventDefault();
+		easterEgg.hidden = true;
 		shell.hidden = false;
 	});
 

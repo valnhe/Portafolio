@@ -62,6 +62,16 @@ Configuración (una sola vez):
 
 Para probar la función en local usa `npx netlify dev` (con `npm run dev` se ve la canción de respaldo).
 
+## 📅 Frase diaria del calendario
+
+Bajo el calendario aparece "hoy: …". Se escribe desde la página privada **`/hoy`**
+(no aparece en buscadores) y se guarda en Netlify Blobs mediante `netlify/functions/hoy.mts`.
+Los días con nota se marcan con un puntito y muestran su frase al pasar el mouse.
+
+- Configura en Netlify la variable de entorno `HOY_CLAVE` con una clave larga; es la que pide `/hoy` para guardar.
+- Si no hay nota para hoy, se muestra `calendario.porDefecto` de `perfil.json`.
+- "Hoy" se calcula con `calendario.zonaHoraria` (por defecto `America/Santiago`).
+
 ## 🚀 Getting Started
 
 1. [Fork](https://github.com/valnhe/portfolio/fork) or clone this repository.

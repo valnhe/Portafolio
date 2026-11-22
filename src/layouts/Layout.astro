@@ -3,7 +3,7 @@ import { SEO } from 'astro-seo';
 import perfil from '../data/perfil.json';
 import '../styles/global.css';
 
-const { titulo = perfil.seo.titulo } = Astro.props as { titulo?: string };
+const { titulo = perfil.seo.titulo, noindex = false } = Astro.props as { titulo?: string; noindex?: boolean };
 ---
 
 <!doctype html>
@@ -13,6 +13,8 @@ const { titulo = perfil.seo.titulo } = Astro.props as { titulo?: string };
 			title={titulo}
 			description={perfil.seo.descripcion}
 			charset="UTF-8"
+			noindex={noindex}
+			nofollow={noindex}
 			openGraph={{
 				basic: {
 					title: titulo,
@@ -23,7 +25,7 @@ const { titulo = perfil.seo.titulo } = Astro.props as { titulo?: string };
 			}}
 		/>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<link rel="icon" type="image/png" href="/favicon.png" />
+		<link rel="icon" type="image/svg+xml" href="/1F338.svg" />
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 		<link

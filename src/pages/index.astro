@@ -107,6 +107,10 @@ import perfil from '../data/perfil.json';
 	const maxBtn = $('[data-maximize]');
 	maxBtn.addEventListener('click', () => {
 		const on = win.classList.toggle('maximized');
+		// En celulares el cambio es instantáneo; un "pop" corto da la sensación de movimiento
+		win.classList.remove('pop');
+		void win.offsetWidth;
+		win.classList.add('pop');
 		maxBtn.setAttribute('aria-label', on ? 'Restaurar tamaño' : 'Maximizar');
 	});
 

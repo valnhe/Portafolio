@@ -1,0 +1,170 @@
+---
+// Página privada para escribir la frase diaria del calendario.
+// No aparece en buscadores; para guardar se necesita la clave HOY_CLAVE configurada en Netlify.
+import Layout from '../layouts/Layout.astro';
+import perfil from '../data/perfil.json';
+---
+
+<Layout titulo="hoy · valnhe" noindex>
+	<main class="site-shell hoy-shell">
+		<section class="hoy-card glass-panel">
+			<span class="paper" aria-hidden="true"></span>
+			<p class="eyebrow">calendario de valnhe</p>
+			<h1>¿Qué toca hoy?</h1>
+
+			<form class="hoy-form" data-hoy-form>
+				<label>
+					<span>clave</span>
+					<input type="password" name="clave" autocomplete="current-password" required data-hoy-clave />
+				</label>
+				<label class="hoy-check">
+					<input type="checkbox" checked data-hoy-recordar />
+					<span>recordar la clave en este dispositivo</span>
+				</label>
+				<label>
+					<span>día</span>
+					<input type="date" name="fecha" required data-hoy-fecha />
+				</label>
+				<label>
+					<span>frase <small data-hoy-contador>0/120</small></span>
+					<input
+						type="text"
+						name="texto"
+						maxlength="120"
+						placeholder={perfil.calendario.porDefecto}
+						autocomplete="off"
+						data-hoy-texto
+					/>
+				</label>
+				<button type="submit" class="cv-button" data-hoy-guardar>guardar</button>
+				<p class="hoy-estado" role="status" data-hoy-estado></p>
+			</form>
+
+			<div class="hoy-lista">
+				<p class="section-kicker">notas de <span data-hoy-mes></span></p>
+				<ul data-hoy-notas></ul>
+			</div>
+
+			<a class="hoy-volver" href="/">← volver al portafolio</a>
+		</section>
+	</main>
+</Layout>
+
+<script define:vars={{ tz: perfil.calendario.zonaHoraria }}>
+	const MESES = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'];
+	const $ = (s) => document.querySelector(s);
+	const form = $('[data-hoy-form]');
+	const clave = $('[data-hoy-clave]');
+	const recordar = $('[data-hoy-recordar]');
+	const fecha = $('[data-hoy-fecha]');
+	const texto = $('[data-hoy-texto]');
+	const contador = $('[data-hoy-contador]');
+	const estado = $('[data-hoy-estado]');
+	const lista = $('[data-hoy-notas]');
+	const mesLabel = $('[data-hoy-mes]');
+	const boton = $('[data-hoy-guardar]');
+
+	const KEY = 'hoy-clave';
+	try {
+		clave.value = localStorage.getItem(KEY) ?? '';
+	} catch {}
+
+	const hoy = new Intl.DateTimeFormat('en-CA', { timeZone: tz }).format(new Date());
+	fecha.value = hoy;
+	let notas = {};
+
+	const avisar = (msg, ok = true) => {
+		estado.textContent = msg;
+		estado.classList.toggle('error', !ok);
+	};
+
+	function pintarLista() {
+		const [y, m] = fecha.value.split('-').map(Number);
+		mesLabel.textContent = `${MESES[m - 1]} ${y}`;
+		lista.replaceChildren();
+		const fechas = Object.keys(notas).sort().reverse();
+		if (!fechas.length) {
+			const li = document.createElement('li');
+			li.className = 'vacio';
+			li.textContent = 'todavía no hay notas este mes';
+			lista.append(li);
+			return;
+		}
+		for (const f of fechas) {
+			const li = document.createElement('li');
+			const editar = document.createElement('button');
+			editar.type = 'button';
+			editar.className = 'hoy-nota';
+			editar.innerHTML = `<small>${Number(f.slice(8))}</small> `;
+			editar.append(notas[f]);
+			editar.title = 'editar';
+			editar.addEventListener('click', () => {
+				fecha.value = f;
+				texto.value = notas[f];
+				texto.dispatchEvent(new Event('input'));
+				texto.focus();
+			});
+			const borrar = document.createElement('button');
+			borrar.type = 'button';
+			borrar.className = 'hoy-borrar';
+			borrar.textContent = '×';
+			borrar.setAttribute('aria-label', `borrar la nota del ${Number(f.slice(8))}`);
+			borrar.addEventListener('click', () => guardar(f, ''));
+			li.append(editar, borrar);
+			lista.append(li);
+		}
+	}
+
+	async function cargarMes() {
+		try {
+			const res = await fetch(`/api/hoy?mes=${fecha.value.slice(0, 7)}`, { cache: 'no-store' });
+			notas = res.ok ? (await res.json()).notas : {};
+		} catch {
+			notas = {};
+			avisar('no pude conectar con /api/hoy', false);
+		}
+		if (fecha.value in notas && !texto.value) {
+			texto.value = notas[fecha.value];
+			texto.dispatchEvent(new Event('input'));
+		}
+		pintarLista();
+	}
+
+	async function guardar(f, t) {
+		boton.disabled = true;
+		avisar('guardando…');
+		try {
+			const res = await fetch('/api/hoy', {
+				method: 'POST',
+				headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${clave.value}` },
+				body: JSON.stringify({ fecha: f, texto: t }),
+			});
+			const data = await res.json().catch(() => ({}));
+			if (!res.ok) return avisar(data.error ?? 'no se pudo guardar', false);
+			try {
+				if (recordar.checked) localStorage.setItem(KEY, clave.value);
+				else localStorage.removeItem(KEY);
+			} catch {}
+			notas = data.notas;
+			pintarLista();
+			avisar(t ? '¡guardado! ✦' : 'nota borrada');
+		} catch {
+			avisar('no pude conectar con /api/hoy', false);
+		} finally {
+			boton.disabled = false;
+		}
+	}
+
+	texto.addEventListener('input', () => (contador.textContent = `${texto.value.length}/120`));
+	fecha.addEventListener('change', () => {
+		texto.value = '';
+		texto.dispatchEvent(new Event('input'));
+		cargarMes();
+	});
+	form.addEventListener('submit', (e) => {
+		e.preventDefault();
+		guardar(fecha.value, texto.value);
+	});
+
+	cargarMes();
+</script>

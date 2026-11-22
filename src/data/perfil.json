@@ -31,5 +31,9 @@
     "titulo": "valnhe | Valentina Castillo — Ingeniera Civil Informática",
     "descripcion": "Portafolio de Valentina Castillo, Ingeniera Civil Informática y desarrolladora Full Stack.",
     "url": "https://valnhe.netlify.app"
+  },
+  "calendario": {
+    "porDefecto": "crear algo bonito",
+    "zonaHoraria": "America/Santiago"
   }
 }

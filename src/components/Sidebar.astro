@@ -18,8 +18,16 @@ const contrib = await fetchContributions(githubUser);
 		<div class="weekday-row">
 			{['L', 'M', 'X', 'J', 'V', 'S', 'D'].map((d) => <span>{d}</span>)}
 		</div>
-		<div class="calendar-grid" data-calendar-grid></div>
-		<p><span class="tiny-star">✦</span> hoy: crear algo bonito</p>
+		<div
+			class="calendar-grid"
+			data-calendar-grid
+			data-tz={perfil.calendario.zonaHoraria}
+			data-default={perfil.calendario.porDefecto}
+		></div>
+		<p class="calendar-note" aria-live="polite">
+			<span class="tiny-star">✦</span>
+			<span data-cal-note-label>hoy</span>: <span data-cal-note>{perfil.calendario.porDefecto}</span>
+		</p>
 	</section>
 
 	<section class="activity-card glass-panel">
@@ -60,18 +68,28 @@ const contrib = await fetchContributions(githubUser);
 		});
 	}
 
-	// El calendario se arma en el navegador para que siempre muestre el mes actual.
+	// Calendario: mes actual (hora de Chile) + notas diarias guardadas desde /hoy
+	const MESES = ['ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic'];
 	const label = document.querySelector('[data-calendar-label]');
-	const grid = document.querySelector('[data-calendar-grid]');
-	if (label && grid) {
-		const now = new Date();
-		const y = now.getFullYear();
-		const m = now.getMonth();
-		label.textContent = `${String(m + 1).padStart(2, '0')} / ${y}`;
-		const offset = (new Date(y, m, 1).getDay() + 6) % 7; // lunes = 0
-		const daysInMonth = new Date(y, m + 1, 0).getDate();
-		const daysPrev = new Date(y, m, 0).getDate();
+	const grid = document.querySelector<HTMLElement>('[data-calendar-grid]');
+	const noteLabel = document.querySelector('[data-cal-note-label]');
+	const noteText = document.querySelector('[data-cal-note]');
+
+	if (label && grid && noteLabel && noteText) {
+		const tz = grid.dataset.tz || 'America/Santiago';
+		const porDefecto = grid.dataset.default || '';
+		// "Hoy" según la zona horaria configurada, en formato YYYY-MM-DD
+		const hoy = new Intl.DateTimeFormat('en-CA', { timeZone: tz }).format(new Date());
+		const [y, m, d] = hoy.split('-').map(Number);
+		const mesKey = hoy.slice(0, 7);
+		label.textContent = `${String(m).padStart(2, '0')} / ${y}`;
+
+		const offset = (new Date(y, m - 1, 1).getDay() + 6) % 7; // lunes = 0
+		const daysInMonth = new Date(y, m, 0).getDate();
+		const daysPrev = new Date(y, m - 1, 0).getDate();
 		const cells = Math.ceil((offset + daysInMonth) / 7) * 7;
+		const dayEls = new Map<string, HTMLElement>();
+
 		for (let i = 0; i < cells; i++) {
 			const span = document.createElement('span');
 			const day = i - offset + 1;
@@ -83,9 +101,46 @@ const contrib = await fetchContributions(githubUser);
 				span.className = 'muted';
 			} else {
 				span.textContent = String(day);
-				if (day === now.getDate()) span.className = 'today';
+				if (day === d) span.classList.add('today');
+				dayEls.set(`${mesKey}-${String(day).padStart(2, '0')}`, span);
 			}
 			grid.appendChild(span);
 		}
+
+		let notas: Record<string, string> = {};
+		const mostrarHoy = () => {
+			noteLabel.textContent = 'hoy';
+			noteText.textContent = notas[hoy] || porDefecto;
+		};
+		const mostrar = (fecha: string) => {
+			const dia = Number(fecha.slice(8));
+			noteLabel.textContent = fecha === hoy ? 'hoy' : `${dia} ${MESES[m - 1]}`;
+			noteText.textContent = notas[fecha];
+		};
+
+		fetch(`/api/hoy?mes=${mesKey}`, { cache: 'no-store' })
+			.then((r) => (r.ok ? r.json() : null))
+			.then((data) => {
+				if (!data?.notas) return;
+				notas = data.notas;
+				mostrarHoy();
+				for (const [fecha, texto] of Object.entries(notas)) {
+					const el = dayEls.get(fecha);
+					if (!el || !texto) continue;
+					el.classList.add('has-note');
+					el.tabIndex = 0;
+					el.title = texto;
+					el.setAttribute('role', 'button');
+					el.setAttribute('aria-label', `${Number(fecha.slice(8))} ${MESES[m - 1]}: ${texto}`);
+					el.addEventListener('mouseenter', () => mostrar(fecha));
+					el.addEventListener('focus', () => mostrar(fecha));
+					el.addEventListener('click', () => mostrar(fecha));
+					el.addEventListener('mouseleave', mostrarHoy);
+					el.addEventListener('blur', mostrarHoy);
+				}
+			})
+			.catch(() => {
+				// Sin la función (por ejemplo, en `npm run dev`) se queda la frase por defecto
+			});
 	}
 </script>

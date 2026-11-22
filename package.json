@@ -11,6 +11,7 @@
     "spotify:auth": "node scripts/spotify-auth.mjs"
   },
   "dependencies": {
+    "@netlify/blobs": "^11.1.9",
     "astro": "^7.4.13",
     "astro-seo": "^1.2.0"
   }

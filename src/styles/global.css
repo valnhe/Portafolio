@@ -1366,8 +1366,6 @@ h1 {
   h1 { font-size: 31px; }
   .content-grid { gap: 12px; margin-top: 12px; }
   .sidebar { grid-template-columns: 1fr; gap: 12px; }
-  .tabs { overflow-x: auto; }
-  .tabs button { padding: 0 13px; }
   .timeline article { grid-template-columns: 1fr; gap: 9px; }
   .projects-view > a { grid-template-columns: 28px 1fr 42px; }
   .projects-view .project-kind { display: none; }
@@ -1751,3 +1749,222 @@ h1 {
   .site-shell:has(.desktop-window.maximized) { padding: 0; }
   .desktop-window.maximized { border-radius: 0; }
 }
+
+/* ---- Rendimiento en celulares y pantallas táctiles ----
+   El desenfoque (backdrop-filter) anidado y animar el tamaño de la ventana
+   hacen que el navegador repinte toda la página en cada cuadro. */
+@media (max-width: 590px), (hover: none) {
+  .site-shell {
+    background-attachment: scroll;
+    transition: none;
+  }
+
+  .site-shell::before { backdrop-filter: none; }
+
+  .desktop-window {
+    backdrop-filter: none;
+    background:
+      linear-gradient(rgba(248, 245, 249, 0.82), rgba(246, 243, 248, 0.78));
+    transition: none;
+  }
+
+  .glass-panel > .paper {
+    backdrop-filter: none;
+    background: linear-gradient(125deg, rgba(255, 255, 255, 0.72), rgba(250, 247, 250, 0.6));
+  }
+
+  .browser-panel > .paper { background: linear-gradient(125deg, rgba(255, 255, 255, 0.72), rgba(250, 247, 250, 0.6)); }
+
+  /* Maximizar/restaurar: cambio instantáneo con un "pop" que solo usa transform */
+  .desktop-window.pop { animation: window-pop 0.28s ease-out; }
+
+  .player-backdrop { backdrop-filter: blur(4px); }
+}
+
+@keyframes window-pop {
+  from { transform: scale(0.985); }
+  to { transform: scale(1); }
+}
+
+/* Calendario: días con nota del día */
+.calendar-grid span { position: relative; }
+
+.calendar-grid .has-note { cursor: pointer; }
+
+.calendar-grid .has-note::after {
+  position: absolute;
+  bottom: 3px;
+  left: 50%;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: #d47a93;
+  content: '';
+  transform: translateX(-50%);
+}
+
+.calendar-grid .today.has-note::after { background: #f6c9d6; }
+
+.calendar-grid .has-note:hover,
+.calendar-grid .has-note:focus-visible {
+  outline: none;
+  background: rgba(212, 122, 147, 0.14);
+}
+
+.calendar-grid .today.has-note:hover,
+.calendar-grid .today.has-note:focus-visible { background: #6c6078; }
+
+.calendar-note { min-height: 2.6em; line-height: 1.5; }
+
+/* Móvil: las pestañas caben sin scroll (el scroll mostraba una barra vertical gris) */
+@media (max-width: 590px) {
+  .tabs { gap: 0; margin: 0 4px; padding: 0 4px; }
+  .tabs button { padding: 0 10px; }
+}
+
+@media (max-width: 380px) {
+  .tabs button { padding: 0 7px; font-size: 10px; }
+}
+
+/* ---- Página privada /hoy ---- */
+.hoy-shell {
+  display: grid;
+  place-items: center;
+}
+
+.hoy-card {
+  position: relative;
+  z-index: 1;
+  width: min(480px, 100%);
+  padding: clamp(26px, 6vw, 40px);
+  --tilt: -0.6deg;
+}
+
+.hoy-card::before {
+  position: absolute;
+  z-index: 3;
+  top: -9px;
+  left: 18%;
+  width: 70px;
+  height: 20px;
+  content: '';
+  opacity: 0.75;
+  background: rgba(242, 166, 184, 0.8);
+  transform: rotate(-4deg);
+}
+
+.hoy-card h1 { margin-bottom: 22px; font-size: 32px; }
+
+.hoy-form { display: grid; gap: 14px; }
+
+.hoy-form label { display: grid; gap: 6px; }
+
+.hoy-form label > span {
+  display: flex;
+  justify-content: space-between;
+  color: var(--muted);
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  text-transform: uppercase;
+}
+
+.hoy-form input[type='password'],
+.hoy-form input[type='date'],
+.hoy-form input[type='text'] {
+  width: 100%;
+  padding: 11px 12px;
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  color: var(--ink);
+  background: rgba(255, 255, 255, 0.7);
+  font: 15px 'Manrope', sans-serif;
+}
+
+.hoy-form input:focus-visible { outline: 2px solid var(--lilac); outline-offset: 1px; }
+
+.hoy-form .hoy-check {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: -4px;
+}
+
+.hoy-form .hoy-check span { font-size: 10px; text-transform: none; }
+
+.hoy-form .cv-button { cursor: pointer; border: 0; font-size: 13px; }
+.hoy-form .cv-button:disabled { opacity: 0.6; cursor: wait; }
+
+.hoy-estado {
+  min-height: 1.2em;
+  margin: 0;
+  color: #577663;
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+}
+
+.hoy-estado.error { color: #b0465f; }
+
+.hoy-lista { margin-top: 26px; }
+.hoy-lista .section-kicker { margin-bottom: 8px; }
+
+.hoy-lista ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.hoy-lista li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-top: 1px solid var(--line);
+}
+
+.hoy-lista li.vacio {
+  padding: 12px 0;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.hoy-nota {
+  flex: 1;
+  padding: 10px 0;
+  cursor: pointer;
+  border: 0;
+  color: var(--ink);
+  background: none;
+  font-size: 13px;
+  text-align: left;
+}
+
+.hoy-nota small {
+  display: inline-block;
+  min-width: 24px;
+  color: var(--lilac-dark);
+  font-family: 'DM Mono', monospace;
+}
+
+.hoy-nota:hover { color: var(--lilac-dark); }
+
+.hoy-borrar {
+  width: 26px;
+  height: 26px;
+  cursor: pointer;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  color: var(--muted);
+  background: rgba(255, 255, 255, 0.5);
+}
+
+.hoy-borrar:hover { color: #b0465f; }
+
+.hoy-volver {
+  display: inline-block;
+  margin-top: 22px;
+  color: var(--muted);
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  text-decoration: none;
+}
+
+.hoy-volver:hover { color: var(--lilac-dark); }

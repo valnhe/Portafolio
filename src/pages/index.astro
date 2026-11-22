@@ -155,7 +155,7 @@ import perfil from '../data/perfil.json';
 	const closePlayer = () => (player.hidden = true);
 	$('[data-open-player]').addEventListener('click', () => {
 		player.hidden = false;
-		player.querySelector<HTMLButtonElement>('.player-close')?.focus();
+		player.querySelector<HTMLButtonElement>('.player-backdrop')?.focus(); // clic afuera o Escape para cerrar
 	});
 	document.querySelectorAll('[data-close-player]').forEach((b) => b.addEventListener('click', closePlayer));
 	document.addEventListener('keydown', (e) => {

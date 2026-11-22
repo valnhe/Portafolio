@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /hoy
+Disallow: /api/
+
+Sitemap: https://valnhe.netlify.app/sitemap-index.xml

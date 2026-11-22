@@ -28,9 +28,16 @@
     "nota": "seguir creando aunque la ventana esté minimizada."
   },
   "seo": {
-    "titulo": "valnhe | Valentina Castillo — Ingeniera Civil Informática",
-    "descripcion": "Portafolio de Valentina Castillo, Ingeniera Civil Informática y desarrolladora Full Stack.",
-    "url": "https://valnhe.netlify.app"
+    "titulo": "Valentina Castillo (valnhe) · Ingeniera Civil Informática",
+    "descripcion": "valnhe es Valentina Castillo Valdés, Ingeniera Civil Informática de la UTFSM y desarrolladora Full Stack en Chile. Portafolio con su trayectoria, proyectos y herramientas.",
+    "url": "https://valnhe.netlify.app",
+    "nombreCompleto": "Valentina Paz Castillo Valdés",
+    "alias": [
+      "valnhe",
+      "Valentina Castillo",
+      "Valentina Castillo Valdés"
+    ],
+    "ubicacion": "Valparaíso, Chile"
   },
   "calendario": {
     "porDefecto": "crear algo bonito",

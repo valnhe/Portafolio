@@ -4,6 +4,33 @@ import perfil from '../data/perfil.json';
 import '../styles/global.css';
 
 const { titulo = perfil.seo.titulo, noindex = false } = Astro.props as { titulo?: string; noindex?: boolean };
+
+const { seo, links } = perfil;
+const canonical = new URL(Astro.url.pathname, seo.url).href;
+const imagen = new URL('/assets/cat-clouds.png', seo.url).href;
+
+// Datos estructurados: le dicen a Google que "valnhe" y "Valentina Castillo" son la misma persona
+const persona = {
+	'@context': 'https://schema.org',
+	'@type': 'Person',
+	name: perfil.nombre,
+	alternateName: [seo.nombreCompleto, ...seo.alias.filter((a) => a !== perfil.nombre)],
+	url: seo.url,
+	image: imagen,
+	jobTitle: 'Ingeniera Civil Informática',
+	description: seo.descripcion,
+	email: `mailto:${links.email}`,
+	address: { '@type': 'PostalAddress', addressLocality: 'Valparaíso', addressCountry: 'CL' },
+	alumniOf: { '@type': 'CollegeOrUniversity', name: 'Universidad Técnica Federico Santa María' },
+	sameAs: [links.github, links.linkedin],
+};
+const sitio = {
+	'@context': 'https://schema.org',
+	'@type': 'WebSite',
+	name: 'valnhe',
+	alternateName: perfil.nombre,
+	url: seo.url,
+};
 ---
 
 <!doctype html>
@@ -15,15 +42,37 @@ const { titulo = perfil.seo.titulo, noindex = false } = Astro.props as { titulo?
 			charset="UTF-8"
 			noindex={noindex}
 			nofollow={noindex}
+			canonical={canonical}
 			openGraph={{
 				basic: {
 					title: titulo,
-					type: 'website',
-					image: new URL('/assets/cat-clouds.png', perfil.seo.url).href,
-					url: perfil.seo.url,
+					type: 'profile',
+					image: imagen,
+					url: canonical,
 				},
+				optional: {
+					description: seo.descripcion,
+					siteName: 'valnhe',
+					locale: 'es_CL',
+				},
+				image: { alt: 'Portafolio de Valentina Castillo (valnhe)' },
+			}}
+			twitter={{
+				card: 'summary_large_image',
+				title: titulo,
+				description: seo.descripcion,
+				image: imagen,
+			}}
+			extend={{
+				meta: [
+					{ name: 'author', content: seo.nombreCompleto },
+					{ property: 'profile:first_name', content: 'Valentina' },
+					{ property: 'profile:last_name', content: 'Castillo Valdés' },
+					{ property: 'profile:username', content: 'valnhe' },
+				],
 			}}
 		/>
+		{!noindex && <script type="application/ld+json" set:html={JSON.stringify([persona, sitio])} />}
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<link rel="icon" type="image/svg+xml" href="/1F338.svg" />
 		<link rel="preconnect" href="https://fonts.googleapis.com" />

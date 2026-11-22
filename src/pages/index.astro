@@ -23,7 +23,7 @@ import perfil from '../data/perfil.json';
 					<span class="online-label">online</span>
 				</div>
 				<div class="window-actions" aria-label="Controles de ventana">
-					<button aria-label="Minimizar" data-minimize><span class="minimize-symbol"></span></button>
+					<button aria-label="Minimizar (en pausa)" aria-disabled="true" title="próximamente" data-minimize><span class="minimize-symbol"></span></button>
 					<button aria-label="Maximizar" data-maximize><span class="maximize-symbol"></span></button>
 					<button aria-label="Cerrar" class="close-button" data-close><span></span></button>
 				</div>
@@ -116,7 +116,14 @@ import perfil from '../data/perfil.json';
 
 	const shell = $('[data-shell]');
 	const notebook = $('[data-notebook]');
+	// Minimizar (agenda secreta) en pausa por ahora: cambia a true para reactivarlo
+	// y quita aria-disabled del botón.
+	const MINIMIZAR_ACTIVO = false;
 	$('[data-minimize]').addEventListener('click', () => {
+		if (!MINIMIZAR_ACTIVO) {
+			$('[data-notice]').textContent = 'minimizar está en pausa por ahora';
+			return;
+		}
 		shell.hidden = true;
 		notebook.hidden = false;
 		window.scrollTo(0, 0);

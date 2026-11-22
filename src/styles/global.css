@@ -147,7 +147,14 @@
   color: var(--lilac-dark);
   background: rgba(255, 255, 255, 0.55);
   font-size: 11px;
+  text-decoration: none;
   transform: rotate(-2deg);
+  transition: transform 0.2s ease;
+}
+
+.cat-mark:hover,
+.cat-mark:focus-visible {
+  transform: rotate(4deg) scale(1.06);
 }
 
 

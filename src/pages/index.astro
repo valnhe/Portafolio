@@ -14,11 +14,17 @@ import perfil from '../data/perfil.json';
 		<div class="ambient ambient-two"></div>
 
 		<section class="desktop-window" data-window>
+			<script is:inline>
+				// En celulares la ventana arranca maximizada (antes del primer pintado, sin salto)
+				if (matchMedia('(max-width: 590px)').matches) {
+					document.currentScript.parentElement.classList.add('maximized');
+				}
+			</script>
 			<header class="titlebar">
 				<div class="brand">
-					<div class="cat-mark" aria-hidden="true">
-						<span>·</span><span>ᴗ</span><span>·</span>
-					</div>
+					<a class="cat-mark" href="/" aria-label="Ir al inicio">
+						<span aria-hidden="true">·</span><span aria-hidden="true">ᴗ</span><span aria-hidden="true">·</span>
+					</a>
 					<span>{perfil.usuario}</span>
 					<span class="online-label">online</span>
 				</div>
@@ -121,6 +127,7 @@ import perfil from '../data/perfil.json';
 	// Ventana: maximizar, minimizar (easter egg) y el botón cerrar que se escapa
 	const win = $('[data-window]');
 	const maxBtn = $('[data-maximize]');
+	if (win.classList.contains('maximized')) maxBtn.setAttribute('aria-label', 'Restaurar tamaño');
 	maxBtn.addEventListener('click', () => {
 		const on = win.classList.toggle('maximized');
 		// En celulares el cambio es instantáneo; un "pop" corto da la sensación de movimiento

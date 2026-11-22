@@ -170,20 +170,16 @@ const contrib = await fetchContributions(githubUser);
 		}
 
 		let notas: Record<string, string> = {};
-		// Cambia la nota del día con una view transition (si el navegador la soporta)
-		const quiet = matchMedia("(prefers-reduced-motion: reduce)");
+		// Cambia la nota del día con una animación corta. No usa view transition:
+		// esa capa tapa la página, el día pierde el hover y la nota parpadea en bucle.
+		const nota = noteText.parentElement!;
 		const ponerNota = (etiqueta: string, texto: string) => {
 			if (noteLabel.textContent === etiqueta && noteText.textContent === texto) return;
-			const update = () => {
-				noteLabel.textContent = etiqueta;
-				noteText.textContent = texto;
-			};
-			if (!document.startViewTransition || quiet.matches) return update();
-			const html = document.documentElement;
-			html.dataset.vt = "nota";
-			document.startViewTransition(update).finished.finally(() => {
-				if (html.dataset.vt === "nota") delete html.dataset.vt;
-			});
+			noteLabel.textContent = etiqueta;
+			noteText.textContent = texto;
+			nota.classList.remove("nota-cambia");
+			void nota.offsetWidth; // reinicia la animación
+			nota.classList.add("nota-cambia");
 		};
 		const mostrarHoy = () => ponerNota("hoy", notas[hoy] || porDefecto);
 		const mostrar = (fecha: string) => {

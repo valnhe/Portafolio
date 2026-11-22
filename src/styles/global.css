@@ -2103,10 +2103,15 @@ h1 {
   from { opacity: 0; transform: translateY(8px); }
 }
 
-/* Nota del calendario: la frase sale y entra al cambiar de día */
-[data-vt='nota'] .calendar-note { view-transition-name: nota-dia; }
-::view-transition-old(nota-dia) { animation: vt-salir 0.14s ease both; }
-::view-transition-new(nota-dia) { animation: vt-entrar 0.26s 0.04s cubic-bezier(0.3, 0.7, 0.2, 1) both; }
+/* Nota del calendario: la frase entra suave al cambiar de día */
+.calendar-note.nota-cambia { animation: vt-entrar 0.26s cubic-bezier(0.3, 0.7, 0.2, 1) both; }
+
+@media (prefers-reduced-motion: reduce) {
+  .calendar-note.nota-cambia { animation: none; }
+}
+
+/* Durante una view transition la capa no debe robar el puntero (evita hovers que parpadean) */
+::view-transition { pointer-events: none; }
 
 /* Minimizar: la ventana se encoge hasta la tarjeta del easter egg (y vuelve al revés) */
 [data-vt='ventana'] .desktop-window,
